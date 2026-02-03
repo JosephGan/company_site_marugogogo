@@ -15,8 +15,8 @@ body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
     Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
   line-height: 1.6;
-  color: #1f2937; /* text-gray-800 */
-  background: #ffffff;
+  color: #ffffff; /* text-gray-800 */
+  background: #000000;
 }
 
 a {
@@ -36,7 +36,7 @@ main {
 
 header {
   border-bottom: 1px solid #e5e7eb;
-  background: #ffffff;
+  background: #000000;
 }
 
 /* 导航栏整体 */
@@ -45,6 +45,7 @@ header {
   margin: 0 auto;
   padding: 1rem;
   display: flex;
+  justify-content: space-between;
   align-items: center;
   border-bottom: 1px solid #e5e7eb;
 }
@@ -72,8 +73,8 @@ header {
 }
 
 .nav-right > a:hover {
-  border-bottom-color: #2563eb;
-  color: #2563eb;
+  border-bottom-color: #ffffff;
+  color: #ffffff;
 }
 
 /* 语言切换区域 */
@@ -91,8 +92,22 @@ header {
 }
 
 .nav-lang a:hover {
-  border-color: #2563eb;
-  color: #2563eb;
+  border-color: #ffffff;
+  color: #ffffff;
+}
+
+/* 汉堡菜单按钮 */
+.hamburger {
+  display: none;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  position: relative;
+  color: #ffffff;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
 }
 
 /* -------- Hero 区块 -------- */
@@ -126,12 +141,12 @@ header {
 }
 
 .btn.primary {
-  background: #2563eb;
-  color: white;
+  background: #ffffff;
+  color: rgb(0, 0, 0);
 }
 
 .btn.primary:hover {
-  background: #1e4ed8;
+  background: #d1d5db;
 }
 
 .btn.secondary {
@@ -169,7 +184,7 @@ section p {
   padding: 1.2rem;
   border: 1px solid #e5e7eb;
   border-radius: 8px;
-  background: #ffffff;
+  background: #000000;
   transition: box-shadow 0.2s ease;
 }
 
@@ -180,11 +195,11 @@ section p {
 .card h3 {
   font-size: 1.2rem;
   margin-bottom: 0.4rem;
-  color: #111827;
+  color: #ffffff;
 }
 
 .card p {
-  color: #4b5563;
+  color: #6b7280;
   font-size: 0.95rem;
 }
 
@@ -207,4 +222,32 @@ footer {
   font-size: 0.9rem;
   color: #6b7280;
   margin-top: 3rem;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  .hamburger {
+    display: block;
+  }
+  .nav-right {
+    display: none;
+    position: fixed;
+    top: 0;
+    right: 0;
+    background: #000000;
+    border: 1px solid #ffffff;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 1rem;
+    width: 200px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    z-index: 10;
+  }
+  .nav-right.open {
+    display: flex;
+  }
+  .nav-lang {
+    flex-direction: row;
+    gap: 0.4rem;
+  }
 }

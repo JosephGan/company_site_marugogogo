@@ -2,7 +2,7 @@ export const defaultLang = "zh";
 
 export const text = {
   zh: {
-    brand: "某某株式会社",
+    brand: "丸五株式会社",
     nav: {
       home: "首页",
       about: "关于我们",
@@ -10,11 +10,11 @@ export const text = {
       contact: "联系我们",
     },
     home: {
-      heroTitle: "用简单可靠的方案解决业务问题",
-      heroSubtitle: "我们专注于企业官网与数字解决方案。",
+      heroTitle: "欢迎访问丸五株式会社官方网站！",
+      heroSubtitle: "",
       buttons: {
         contact: "预约咨询",
-        services: "查看服务项目",
+        services: "业务介绍",
       },
       featuresTitle: "我们的优势",
       features: [
@@ -26,16 +26,18 @@ export const text = {
     about: {
       title: "关于我们",
       paragraphs: [
-        "某某株式会社是一家位于东京的 Web 制作团队。",
+        "丸五株式会社是一家位于东京的 Web 制作团队。",
         "我们专注于企业网站与品牌网站，服务中小企业与个人事业主。",
       ],
     },
     services: {
       title: "服务项目",
       items: [
-        { title: "企业官网制作", desc: "搭建高质量企业官网" },
-        { title: "活动页 / 着陆页", desc: "适合推广、广告、产品介绍" },
-        { title: "中日双语网站", desc: "同时面向中文与日文客户" },
+        { title: "餐饮", desc: "在中国和日本多个城市运营多个餐饮项目" },
+        { title: "医疗", desc: "在日就医中介和见学组织" },
+        { title: "贸易", desc: "中日跨境贸易" },
+        { title: "农业", desc: "在日本栃木县持有农业基地，进行各类生产和运营" },
+        { title: "咨询", desc: "各种法律、旅游和商务访问咨询" },
       ],
     },
     contact: {
@@ -48,12 +50,12 @@ export const text = {
     company: {
       email: "contact@example.com",
       phone: "03-xxxx-xxxx",
-      address: "東京都〇〇区〇〇 1-2-3 ABCビル 5F",
+      address: "東京都墨田区本所2-10-5 402",
     },
   },
 
   ja: {
-    brand: "〇〇株式会社",
+    brand: "丸五株式会社",
     nav: {
       home: "ホーム",
       about: "会社概要",
@@ -77,7 +79,7 @@ export const text = {
     about: {
       title: "会社概要",
       paragraphs: [
-        "〇〇株式会社は東京を拠点とする Web 制作チームです。",
+        "丸五株式会社は東京を拠点とする Web 制作チームです。",
         "企業サイト・ブランドサイトの制作を中心に支援しています。",
       ],
     },
