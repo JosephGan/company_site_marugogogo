@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://marugogogo.com/sitemap-index.xml
+Sitemap: https://marugogogo.com/sitemap.xml
