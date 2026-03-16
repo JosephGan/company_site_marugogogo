@@ -11,7 +11,7 @@ export const text = {
     },
     home: {
       heroTitle: "欢迎访问丸五株式会社官方网站！",
-      heroSubtitle: "",
+      heroSubtitle: "丸五株式会社总部位于东京，专注于搭建中日桥梁，为两地个人和企业提供餐饮、医疗、贸易、农业及咨询服务。",
       buttons: {
         contact: "预约咨询",
         services: "业务介绍",
@@ -26,7 +26,7 @@ export const text = {
     about: {
       title: "关于我们",
       paragraphs: [
-        "丸五株式会社位于东京，",
+        "丸五株式会社总部位于东京。",
         "我们专注于搭建中日之间的桥梁，为两地个人和企业提供各种各样的定制化服务。",
       ],
     },
@@ -64,7 +64,7 @@ export const text = {
     },
     home: {
       heroTitle: "丸五株式会社の公式サイトへようこそ！",
-      heroSubtitle: "",
+      heroSubtitle: "丸五株式会社は東京を拠点に、日本と中国を繋ぐ架け橋として、飲食・医療・貿易・農業・コンサルティングなど多彩なサービスを提供しています。",
       buttons: {
         contact: "お問い合わせ",
         services: "サービスを見る",
