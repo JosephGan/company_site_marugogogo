@@ -5,7 +5,10 @@ import { text } from "../content/text.js";
 const t = text["zh"]; // Default for SSG
 ---
 
-<Layout>
+<Layout
+  title="关于我们"
+  description="丸五株式会社位于东京，专注于搭建中日之间的桥梁，为两地个人和企业提供定制化服务。"
+>
   <section class="about">
     <h1 data-i18n="about.title">{t.about.title}</h1>
     {t.about.paragraphs.map((para, i) => (
