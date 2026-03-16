@@ -1,7 +1,9 @@
 import { defineConfig } from 'astro/config';
+import sitemap from '@astrojs/sitemap';
 
 export default defineConfig({
-  site: 'https://marugogogo.com', // 以后部署到 GitHub Pages 时再改
+  site: 'https://marugogogo.com',
   base: '/',
-  output: 'static', 
+  output: 'static',
+  integrations: [sitemap()],
 });
