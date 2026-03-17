@@ -9,15 +9,19 @@ const t = text["zh"];
   title="联系我们"
   description="联系丸五株式会社 — 地址：東京都墨田区本所2-10-5 402号室。欢迎咨询合作事宜。"
 >
-  <section class="contact">
+  <section class="contact-section">
     <h1 data-i18n="contact.title">{t.contact.title}</h1>
     <p data-i18n="contact.intro">{t.contact.intro}</p>
-    
+
     <div class="contact-info">
-      <!--
-      <p><strong data-i18n="contact.emailLabel">{t.contact.emailLabel}:</strong> {t.company.email}</p>
-      <p><strong data-i18n="contact.phoneLabel">{t.contact.phoneLabel}:</strong> {t.company.phone}</p> -->
-      <p><strong data-i18n="contact.addressLabel">{t.contact.addressLabel}:</strong> {t.company.address}</p>
+      <div class="contact-row">
+        <span class="contact-label" data-i18n="contact.emailLabel">{t.contact.emailLabel}</span>
+        <a class="contact-value" href={`mailto:${t.company.email}`}>{t.company.email}</a>
+      </div>
+      <div class="contact-row">
+        <span class="contact-label" data-i18n="contact.addressLabel">{t.contact.addressLabel}</span>
+        <span class="contact-value">{t.company.address}</span>
+      </div>
     </div>
   </section>
 </Layout>

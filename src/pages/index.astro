@@ -2,14 +2,14 @@
 import Layout from "../layouts/BaseLayout.astro";
 import { text } from "../content/text.js";
 
-const lang = "zh"; // Default for SSG
-const t = text[lang];
+const t = text["zh"];
 ---
 
 <Layout
   title="首页"
-  description="丸五株式会社 — 总部位于东京，专注搭建中日桥梁，提供餐饮、医疗、贸易、农业及咨询服务。"
+  description="丸五株式会社 — 总部位于东京，专注来日医疗·养老·旅游咨询、跨境贸易、餐饮运营及农产品贸易服务。"
 >
+  <!-- Hero -->
   <section class="hero">
     <h1 data-i18n="home.heroTitle">{t.home.heroTitle}</h1>
     <p data-i18n="home.heroSubtitle">{t.home.heroSubtitle}</p>
@@ -18,17 +18,30 @@ const t = text[lang];
       <a href="/services" class="btn secondary" data-i18n="home.buttons.services">{t.home.buttons.services}</a>
     </div>
   </section>
-<!-- Features Section 
-  <section class="features">
-    <h2 data-i18n="home.featuresTitle">{t.home.featuresTitle}</h2>
-    <div class="grid feature-list" data-feature-list="zh">
-      {t.home.features.map(f => (
-        <div class="feature-item">
-          <h3 data-i18n={`home.features.${t.home.features.indexOf(f)}.title`}>{f.title}</h3>
-          <p data-i18n={`home.features.${t.home.features.indexOf(f)}.desc`}>{f.desc}</p>
-        </div>
-      ))}
-    </div>
-    -->
+
+  <!-- Company Introduction -->
+  <section class="about-section">
+    <div class="section-divider"></div>
+    <h2 data-i18n="about.title">{t.about.title}</h2>
+    {t.about.paragraphs.map((p, i) => (
+      <p data-i18n={`about.paragraphs.${i}`}>{p}</p>
+    ))}
   </section>
 </Layout>
+
+<script is:inline define:vars={{ text }}>
+  function reRenderAbout(lang) {
+    const t = text[lang];
+    const aboutSection = document.querySelector('.about-section');
+    if (!aboutSection || !t.about) return;
+    const title = aboutSection.querySelector('[data-i18n="about.title"]');
+    if (title) title.textContent = t.about.title;
+    t.about.paragraphs.forEach((p, i) => {
+      const el = aboutSection.querySelector(`[data-i18n="about.paragraphs.${i}"]`);
+      if (el) el.textContent = p;
+    });
+  }
+
+  document.addEventListener('langchange', (e) => reRenderAbout(e.detail.lang));
+  reRenderAbout(localStorage.getItem('lang') || 'zh');
+</script>

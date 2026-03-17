@@ -1,23 +1,161 @@
 ---
 import Layout from "../layouts/BaseLayout.astro";
 import { text } from "../content/text.js";
+import fs from 'node:fs';
+import path from 'node:path';
 
 const t = text["zh"];
+
+const slugs = ['medical', 'trade', 'restaurant', 'agriculture', 'consulting'];
+const serviceImages = Object.fromEntries(
+  slugs.map(slug => {
+    const dir = path.join(process.cwd(), 'public/images', slug);
+    const files = fs.existsSync(dir)
+      ? fs.readdirSync(dir).filter(f => /\.(jpe?g|png|gif|webp|svg|avif)$/i.test(f)).sort()
+      : [];
+    return [slug, files];
+  })
+);
 ---
 
 <Layout
   title="服务项目"
-  description="丸五株式会社提供餐饮、医疗就医中介、中日跨境贸易、农业生产及法律商务咨询等多项服务。"
+  description="丸五株式会社提供来日医疗·养老·旅游咨询、跨境贸易、餐饮运营、农产品贸易等多项服务。"
 >
-  <section class="services">
+  <section class="services-page">
     <h1 data-i18n="services.title">{t.services.title}</h1>
-    <div class="grid services" data-service-list="zh">
-      {t.services.items.map(item => (
-        <div class="card service-item">
-          <h2>{item.title}</h2>
-          <p>{item.desc}</p>
-        </div>
-      ))}
-    </div>
   </section>
+
+  <!-- Full-bleed service banners — inside Layout so footer stays at bottom -->
+  <div class="services-section" data-service-banners>
+    {t.services.items.map((item, i) => {
+      const images = serviceImages[item.slug] || [];
+      return (
+        <div class={`service-banner${i % 2 === 1 ? ' reverse' : ''}`} data-slug={item.slug}>
+          <div class="service-text">
+            <h3>{item.title}</h3>
+            <p>{item.desc}</p>
+          </div>
+          <div class="service-image">
+            <div class="slideshow" data-slug={item.slug}>
+              {images.length > 0 ? (
+                <>
+                  <div class="slides">
+                    {images.map((img, idx) => (
+                      <div class={`slide${idx === 0 ? ' active' : ''}`}>
+                        <img src={`/images/${item.slug}/${img}`} alt={`${item.title} ${idx + 1}`} loading="lazy" />
+                      </div>
+                    ))}
+                  </div>
+                  {images.length > 1 && (
+                    <>
+                      <button class="slide-btn prev" aria-label="上一张">&#8249;</button>
+                      <button class="slide-btn next" aria-label="下一张">&#8250;</button>
+                      <div class="slide-dots">
+                        {images.map((_, idx) => (
+                          <span class={`dot${idx === 0 ? ' active' : ''}`} data-idx={idx}></span>
+                        ))}
+                      </div>
+                    </>
+                  )}
+                </>
+              ) : (
+                <div class="service-image-placeholder">图片即将上线</div>
+              )}
+            </div>
+          </div>
+        </div>
+      );
+    })}
+  </div>
 </Layout>
+
+<script is:inline define:vars={{ text, serviceImages }}>
+  // Build slideshow HTML for a service item
+  function buildSlideshow(item, lang) {
+    const images = serviceImages[item.slug] || [];
+    if (images.length === 0) {
+      const placeholder = lang === 'ja' ? '図版準備中' : '图片即将上线';
+      return `<div class="service-image-placeholder">${placeholder}</div>`;
+    }
+    const slides = images.map((img, idx) =>
+      `<div class="slide${idx === 0 ? ' active' : ''}">
+        <img src="/images/${item.slug}/${img}" alt="${item.title} ${idx + 1}" loading="lazy" />
+      </div>`
+    ).join('');
+    const dots = images.length > 1
+      ? `<div class="slide-dots">${images.map((_, idx) =>
+          `<span class="dot${idx === 0 ? ' active' : ''}" data-idx="${idx}"></span>`
+        ).join('')}</div>` : '';
+    const arrows = images.length > 1
+      ? `<button class="slide-btn prev" aria-label="上一张">&#8249;</button>
+         <button class="slide-btn next" aria-label="下一张">&#8250;</button>` : '';
+    return `<div class="slides">${slides}</div>${arrows}${dots}`;
+  }
+
+  // Re-render service banners on lang change
+  function reRenderServiceBanners(lang) {
+    const container = document.querySelector('[data-service-banners]');
+    if (!container || !text[lang]?.services?.items) return;
+    container.innerHTML = text[lang].services.items.map((item, i) => `
+      <div class="service-banner${i % 2 === 1 ? ' reverse' : ''}" data-slug="${item.slug}">
+        <div class="service-text">
+          <h3>${item.title}</h3>
+          <p>${item.desc}</p>
+        </div>
+        <div class="service-image">
+          <div class="slideshow" data-slug="${item.slug}">
+            ${buildSlideshow(item, lang)}
+          </div>
+        </div>
+      </div>
+    `).join('');
+    initSlideshows();
+  }
+
+  // Initialize all slideshows on the page
+  function initSlideshows() {
+    document.querySelectorAll('.slideshow').forEach(sw => {
+      const slides = sw.querySelectorAll('.slide');
+      if (slides.length <= 1) return;
+
+      let current = 0;
+      let timer = null;
+
+      function goTo(idx) {
+        slides[current].classList.remove('active');
+        const dots = sw.querySelectorAll('.dot');
+        if (dots[current]) dots[current].classList.remove('active');
+        current = (idx + slides.length) % slides.length;
+        slides[current].classList.add('active');
+        if (dots[current]) dots[current].classList.add('active');
+      }
+
+      function startAuto() {
+        timer = setInterval(() => goTo(current + 1), 5000);
+      }
+
+      function resetAuto() {
+        clearInterval(timer);
+        startAuto();
+      }
+
+      sw.querySelector('.prev')?.addEventListener('click', () => { goTo(current - 1); resetAuto(); });
+      sw.querySelector('.next')?.addEventListener('click', () => { goTo(current + 1); resetAuto(); });
+      sw.querySelectorAll('.dot').forEach(dot => {
+        dot.addEventListener('click', () => { goTo(parseInt(dot.dataset.idx)); resetAuto(); });
+      });
+
+      startAuto();
+    });
+  }
+
+  document.addEventListener('langchange', (e) => reRenderServiceBanners(e.detail.lang));
+
+  const savedLang = localStorage.getItem('lang') || 'zh';
+  if (savedLang !== 'zh') {
+    reRenderServiceBanners(savedLang);
+  } else {
+    initSlideshows();
+  }
+</script>
