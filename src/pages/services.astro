@@ -6,7 +6,7 @@ import path from 'node:path';
 
 const t = text["zh"];
 
-const slugs = ['medical', 'trade', 'restaurant', 'agriculture', 'consulting'];
+const slugs = ['medical', 'visit', 'trade', 'restaurant', 'agriculture', 'consulting'];
 const serviceImages = Object.fromEntries(
   slugs.map(slug => {
     const dir = path.join(process.cwd(), 'public/images', slug);

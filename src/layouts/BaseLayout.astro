@@ -84,7 +84,6 @@ const canonicalURL = new URL(Astro.url.pathname, siteUrl).href;
 
         <div class="nav-right" id="nav-menu">
           <a href="/" data-i18n="nav.home">{t.nav.home}</a>
-          <a href="/services" data-i18n="nav.services">{t.nav.services}</a>
           <a href="/contact" data-i18n="nav.contact">{t.nav.contact}</a>
 
           <span class="nav-lang">
@@ -125,17 +124,6 @@ const canonicalURL = new URL(Astro.url.pathname, siteUrl).href;
           el.textContent = value;
         }
       });
-
-      // Re-render service list (services page)
-      const serviceList = document.querySelector("[data-service-list]");
-      if (serviceList && text[lang].services?.items) {
-        serviceList.innerHTML = text[lang].services.items.map(item => `
-          <div class="service-card">
-            <h2>${item.title}</h2>
-            <p>${item.desc}</p>
-          </div>
-        `).join("");
-      }
 
       // Dispatch event so page-level scripts can react (e.g. index.astro)
       document.dispatchEvent(new CustomEvent("langchange", { detail: { lang } }));

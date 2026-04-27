@@ -381,12 +381,17 @@ main {
   padding: 3rem 1.5rem 1.5rem;
 }
 
-.services-page h1 {
+.services-page h1,
+.services-page h2 {
   font-family: "Noto Serif SC", "Noto Serif JP", serif;
   font-size: clamp(1.4rem, 3vw, 2rem);
   font-weight: 700;
   color: #ffffff;
   letter-spacing: 0.05em;
+}
+
+.home-services-heading {
+  text-align: center;
 }
 
 /* -------- Contact page -------- */
@@ -407,6 +412,56 @@ main {
 .contact-section p {
   color: #b0b5bc;
   margin-bottom: 2rem;
+}
+
+.contact-about {
+  max-width: 780px;
+  margin: 0 auto 2.5rem;
+  text-align: left;
+}
+
+.contact-about .section-divider {
+  margin: 0 0 1.5rem;
+}
+
+.contact-about h2 {
+  font-family: "Noto Serif SC", "Noto Serif JP", serif;
+  font-size: clamp(1.2rem, 2.4vw, 1.7rem);
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 1rem;
+  letter-spacing: 0.04em;
+}
+
+.contact-about p {
+  margin-bottom: 1rem;
+  line-height: 2;
+}
+
+.contact-about p:last-child {
+  margin-bottom: 0;
+}
+
+.contact-centered {
+  text-align: center;
+}
+
+.contact-centered .contact-about {
+  text-align: center;
+}
+
+.contact-centered .contact-about .section-divider {
+  margin: 0 auto 1.5rem;
+}
+
+.contact-centered .contact-info {
+  max-width: 720px;
+  margin: 1.5rem auto 0;
+}
+
+.contact-centered .contact-row {
+  justify-content: center;
+  text-align: left;
 }
 
 .contact-info {

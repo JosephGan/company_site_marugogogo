@@ -9,8 +9,15 @@ const t = text["zh"];
   title="联系我们"
   description="联系丸五株式会社 — 地址：東京都墨田区本所2-10-5 402号室。欢迎咨询合作事宜。"
 >
-  <section class="contact-section">
-    <h1 data-i18n="contact.title">{t.contact.title}</h1>
+  <section class="contact-section contact-centered">
+    <div class="contact-about" data-contact-about>
+      <div class="section-divider"></div>
+      <h2 data-i18n="about.title">{t.about.title}</h2>
+      {t.about.paragraphs.map((p, i) => (
+        <p data-i18n={`about.paragraphs.${i}`}>{p}</p>
+      ))}
+    </div>
+
     <p data-i18n="contact.intro">{t.contact.intro}</p>
 
     <div class="contact-info">
@@ -25,3 +32,20 @@ const t = text["zh"];
     </div>
   </section>
 </Layout>
+
+<script is:inline define:vars={{ text }}>
+  function reRenderContactAbout(lang) {
+    const t = text[lang];
+    const aboutSection = document.querySelector("[data-contact-about]");
+    if (!aboutSection || !t.about) return;
+    const title = aboutSection.querySelector('[data-i18n="about.title"]');
+    if (title) title.textContent = t.about.title;
+    t.about.paragraphs.forEach((p, i) => {
+      const el = aboutSection.querySelector(`[data-i18n="about.paragraphs.${i}"]`);
+      if (el) el.textContent = p;
+    });
+  }
+
+  document.addEventListener("langchange", (e) => reRenderContactAbout(e.detail.lang));
+  reRenderContactAbout(localStorage.getItem("lang") || "zh");
+</script>
