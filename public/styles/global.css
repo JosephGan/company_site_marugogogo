@@ -15,8 +15,8 @@ body {
   font-family: "Noto Sans JP", -apple-system, BlinkMacSystemFont, "Segoe UI",
     "Hiragino Sans", "Yu Gothic UI", sans-serif;
   line-height: 1.8;
-  color: #e8e8e8;
-  background: #0a0a0a;
+  color: #4a4540;
+  background: #faf8f5;
   -webkit-font-smoothing: antialiased;
 }
 
@@ -30,7 +30,7 @@ header {
   position: sticky;
   top: 0;
   z-index: 100;
-  background: rgba(10, 10, 10, 0.85);
+  background: rgba(107, 143, 113, 0.92);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
 }
@@ -61,7 +61,7 @@ header {
   font-size: 0.9rem;
   font-weight: 500;
   letter-spacing: 0.05em;
-  color: #c8c8c8;
+  color: #f0ece6;
   padding-bottom: 3px;
   border-bottom: 1px solid transparent;
   transition: color 0.2s ease, border-color 0.2s ease;
@@ -82,9 +82,9 @@ header {
 .nav-lang a {
   font-size: 0.78rem;
   padding: 0.18rem 0.55rem;
-  border: 1px solid #444;
+  border: 1px solid rgba(240, 236, 230, 0.5);
   border-radius: 4px;
-  color: #aaa;
+  color: #f0ece6;
   transition: border-color 0.2s ease, color 0.2s ease;
 }
 
@@ -94,7 +94,7 @@ header {
 }
 
 .nav-lang span {
-  color: #444;
+  color: rgba(240, 236, 230, 0.5);
 }
 
 .hamburger {
@@ -109,8 +109,6 @@ header {
 }
 
 /* -------- Main content container -------- */
-/* No side padding on main — each section controls its own padding.
-   This lets .services-section use calc(50% - 50vw) full-bleed cleanly. */
 main {
   max-width: 1200px;
   margin: 0 auto;
@@ -131,14 +129,14 @@ main {
   letter-spacing: 0.04em;
   line-height: 1.4;
   margin-bottom: 1.2rem;
-  color: #ffffff;
+  color: #2d2a26;
 }
 
 .hero p {
   max-width: 680px;
   margin: 0 auto 2rem;
   font-size: 1.05rem;
-  color: #b0b5bc;
+  color: #8a847a;
   line-height: 1.9;
 }
 
@@ -155,32 +153,32 @@ main {
 
 .btn.primary {
   background: transparent;
-  color: #ffffff;
-  border: 1.5px solid rgba(255, 255, 255, 0.7);
+  color: #6b8f71;
+  border: 1.5px solid rgba(107, 143, 113, 0.6);
 }
 
 .btn.primary:hover {
-  background: rgba(255, 255, 255, 0.1);
-  border-color: #ffffff;
+  background: rgba(107, 143, 113, 0.08);
+  border-color: #6b8f71;
 }
 
 .btn.secondary {
   background: transparent;
-  color: #c8c8c8;
-  border: 1.5px solid rgba(255, 255, 255, 0.2);
+  color: #7a756d;
+  border: 1.5px solid rgba(180, 170, 160, 0.4);
 }
 
 .btn.secondary:hover {
-  background: rgba(255, 255, 255, 0.06);
-  border-color: rgba(255, 255, 255, 0.5);
-  color: #ffffff;
+  background: rgba(180, 170, 160, 0.1);
+  border-color: rgba(107, 143, 113, 0.5);
+  color: #4a4540;
 }
 
 /* -------- Section divider -------- */
 .section-divider {
   width: 48px;
   height: 2px;
-  background: rgba(255, 255, 255, 0.25);
+  background: rgba(107, 143, 113, 0.3);
   margin: 0 auto 2rem;
 }
 
@@ -196,7 +194,7 @@ main {
   font-size: clamp(1.3rem, 3vw, 1.9rem);
   font-weight: 700;
   letter-spacing: 0.06em;
-  color: #ffffff;
+  color: #2d2a26;
   margin-bottom: 1rem;
 }
 
@@ -204,13 +202,11 @@ main {
   max-width: 720px;
   margin: 0 auto 1rem;
   font-size: 0.98rem;
-  color: #b0b5bc;
+  color: #6b6560;
   line-height: 2;
 }
 
 /* -------- Services full-width section -------- */
-/* Full-bleed: break out of main's max-width constraint.
-   Works correctly because main has no side padding. */
 .services-section {
   width: 100vw;
   margin-left: calc(50% - 50vw);
@@ -223,12 +219,12 @@ main {
   display: grid;
   grid-template-columns: 1fr 1fr;
   min-height: 340px;
-  border-top: 1px solid rgba(255, 255, 255, 0.07);
+  border-top: 1px solid rgba(180, 170, 160, 0.25);
   animation: fadeUp 0.6s ease both;
 }
 
 .service-banner:last-child {
-  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+  border-bottom: 1px solid rgba(180, 170, 160, 0.25);
 }
 
 .service-banner.reverse {
@@ -250,21 +246,50 @@ main {
   font-family: "Noto Serif SC", "Noto Serif JP", serif;
   font-size: clamp(1.2rem, 2.5vw, 1.6rem);
   font-weight: 700;
-  color: #ffffff;
+  color: #2d2a26;
   margin-bottom: 1rem;
   letter-spacing: 0.04em;
 }
 
 .service-text p {
   font-size: 0.95rem;
-  color: #a8adb5;
+  color: #6b6560;
   line-height: 2;
   max-width: 420px;
 }
 
+/* Medical partners link */
+.medical-partners-link {
+  margin-top: 1.2rem;
+}
+
+.partners-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  font-size: 0.9rem;
+  color: #6b8f71;
+  font-weight: 500;
+  letter-spacing: 0.03em;
+  transition: color 0.2s ease;
+}
+
+.partners-link:hover {
+  color: #5a7a60;
+}
+
+.partners-link::after {
+  content: "→";
+  transition: transform 0.2s ease;
+}
+
+.partners-link:hover::after {
+  transform: translateX(3px);
+}
+
 /* -------- Slideshow -------- */
 .service-image {
-  background: #111;
+  background: #f0ece6;
   position: relative;
   overflow: hidden;
   min-height: 340px;
@@ -318,9 +343,9 @@ main {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  background: rgba(0,0,0,0.4);
-  color: #fff;
-  border: 1px solid rgba(255,255,255,0.2);
+  background: rgba(250, 248, 245, 0.8);
+  color: #4a4540;
+  border: 1px solid rgba(180, 170, 160, 0.3);
   border-radius: 50%;
   width: 36px;
   height: 36px;
@@ -335,8 +360,8 @@ main {
 }
 
 .slide-btn:hover {
-  background: rgba(0,0,0,0.7);
-  border-color: rgba(255,255,255,0.6);
+  background: rgba(250, 248, 245, 0.95);
+  border-color: rgba(107, 143, 113, 0.4);
 }
 
 .slide-btn.prev { left: 12px; }
@@ -357,19 +382,19 @@ main {
   width: 7px;
   height: 7px;
   border-radius: 50%;
-  background: rgba(255,255,255,0.35);
+  background: rgba(180, 170, 160, 0.5);
   cursor: pointer;
   transition: background 0.2s ease, transform 0.2s ease;
 }
 
 .dot.active {
-  background: #fff;
+  background: #6b8f71;
   transform: scale(1.25);
 }
 
 /* Placeholder when no images */
 .service-image-placeholder {
-  color: #2a2a2a;
+  color: #b5afa8;
   font-size: 0.75rem;
   letter-spacing: 0.15em;
   text-transform: uppercase;
@@ -386,7 +411,7 @@ main {
   font-family: "Noto Serif SC", "Noto Serif JP", serif;
   font-size: clamp(1.4rem, 3vw, 2rem);
   font-weight: 700;
-  color: #ffffff;
+  color: #2d2a26;
   letter-spacing: 0.05em;
 }
 
@@ -404,13 +429,13 @@ main {
   font-family: "Noto Serif SC", "Noto Serif JP", serif;
   font-size: clamp(1.4rem, 3vw, 2rem);
   font-weight: 700;
-  color: #ffffff;
+  color: #2d2a26;
   margin-bottom: 0.5rem;
   letter-spacing: 0.05em;
 }
 
 .contact-section p {
-  color: #b0b5bc;
+  color: #6b6560;
   margin-bottom: 2rem;
 }
 
@@ -428,7 +453,7 @@ main {
   font-family: "Noto Serif SC", "Noto Serif JP", serif;
   font-size: clamp(1.2rem, 2.4vw, 1.7rem);
   font-weight: 700;
-  color: #ffffff;
+  color: #2d2a26;
   margin-bottom: 1rem;
   letter-spacing: 0.04em;
 }
@@ -473,7 +498,7 @@ main {
   gap: 1.5rem;
   align-items: flex-start;
   padding: 1rem 0;
-  border-bottom: 1px solid rgba(255,255,255,0.07);
+  border-bottom: 1px solid rgba(180, 170, 160, 0.2);
 }
 
 .contact-label {
@@ -481,14 +506,104 @@ main {
   font-weight: 600;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: #666;
+  color: #a09a93;
   min-width: 80px;
   padding-top: 0.1rem;
 }
 
 .contact-value {
-  color: #c8c8c8;
+  color: #6b6560;
   font-size: 0.98rem;
+}
+
+/* -------- Partners page -------- */
+.partners-section {
+  padding: 4rem 1.5rem;
+  animation: fadeUp 0.8s ease both;
+}
+
+.partners-section h1 {
+  font-family: "Noto Serif SC", "Noto Serif JP", serif;
+  font-size: clamp(1.5rem, 3vw, 2.2rem);
+  font-weight: 700;
+  color: #2d2a26;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.5rem;
+  text-align: center;
+}
+
+.partners-section .page-intro {
+  text-align: center;
+  color: #7a756d;
+  font-size: 0.95rem;
+  max-width: 600px;
+  margin: 0 auto 3rem;
+  line-height: 1.9;
+}
+
+.partners-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 3rem;
+}
+
+.partner-card {
+  background: #ffffff;
+  border: 1px solid rgba(180, 170, 160, 0.25);
+  border-radius: 8px;
+  padding: 2rem;
+  transition: box-shadow 0.25s ease, border-color 0.25s ease;
+}
+
+.partner-card:hover {
+  box-shadow: 0 4px 20px rgba(180, 170, 160, 0.15);
+  border-color: rgba(107, 143, 113, 0.3);
+}
+
+.partner-card h2 {
+  font-family: "Noto Serif SC", "Noto Serif JP", serif;
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #2d2a26;
+  margin-bottom: 0.2rem;
+  letter-spacing: 0.03em;
+}
+
+.partner-card .partner-name-en {
+  font-size: 0.8rem;
+  color: #9a948c;
+  margin-bottom: 1rem;
+  letter-spacing: 0.05em;
+}
+
+.partner-card p {
+  font-size: 0.92rem;
+  color: #6b6560;
+  line-height: 1.9;
+}
+
+.partners-back {
+  text-align: center;
+  margin-top: 2rem;
+}
+
+.partners-back a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  font-size: 0.9rem;
+  color: #6b8f71;
+  font-weight: 500;
+  transition: color 0.2s ease;
+}
+
+.partners-back a:hover {
+  color: #5a7a60;
+}
+
+.partners-back a::before {
+  content: "←";
 }
 
 /* -------- Footer -------- */
@@ -496,7 +611,7 @@ footer {
   padding: 2.5rem 1.5rem;
   text-align: center;
   font-size: 0.82rem;
-  color: #444;
+  color: #a09a93;
   letter-spacing: 0.08em;
 }
 
@@ -515,8 +630,8 @@ footer {
     position: fixed;
     top: 0;
     right: 0;
-    background: rgba(10, 10, 10, 0.97);
-    border-left: 1px solid rgba(255,255,255,0.1);
+    background: rgba(107, 143, 113, 0.97);
+    border-left: 1px solid rgba(240, 236, 230, 0.2);
     flex-direction: column;
     gap: 1.2rem;
     padding: 4rem 1.5rem 2rem;
@@ -553,4 +668,8 @@ footer {
   }
 
   .service-text p { max-width: 100%; }
+
+  .partners-grid {
+    grid-template-columns: 1fr;
+  }
 }

@@ -1,0 +1,77 @@
+---
+import Layout from "../layouts/BaseLayout.astro";
+import { text } from "../content/text.js";
+
+const t = text["zh"];
+---
+
+<Layout
+  title="合作医疗机构"
+  description="丸五株式会社合作医疗机构介绍 — 圣心医疗美容诊所、金泽地区医疗机构、东京再生医疗诊所、国立国际医疗研究中心等日本顶尖医疗机构。"
+>
+  <section class="partners-section">
+    <h1 data-i18n="partners.title">{t.partners.title}</h1>
+    <p class="page-intro" data-i18n="partners.intro">{t.partners.intro}</p>
+
+    <div class="partners-grid" data-partners-grid>
+      {t.partners.items.map((partner) => (
+        <div class="partner-card">
+          <h2>{partner.name}</h2>
+          <p class="partner-name-en">{partner.nameEn}</p>
+          <p>{partner.description}</p>
+        </div>
+      ))}
+    </div>
+
+    <div class="partners-back">
+      <a href="/" data-i18n="partners.backToHome">{t.partners.backToHome}</a>
+    </div>
+  </section>
+</Layout>
+
+<script is:inline define:vars={{ text }}>
+  function reRenderPartners(lang) {
+    const grid = document.querySelector("[data-partners-grid]");
+    if (!grid || !text[lang]?.partners?.items) return;
+
+    grid.innerHTML = text[lang].partners.items
+      .map(
+        (partner) => `
+        <div class="partner-card">
+          <h2>${partner.name}</h2>
+          <p class="partner-name-en">${partner.nameEn}</p>
+          <p>${partner.description}</p>
+        </div>
+      `,
+      )
+      .join("");
+  }
+
+  document.addEventListener("langchange", (e) => {
+    const lang = e.detail.lang;
+    reRenderPartners(lang);
+
+    // Update title
+    const titleEl = document.querySelector("h1");
+    if (titleEl && text[lang]?.partners?.title) {
+      titleEl.textContent = text[lang].partners.title;
+    }
+
+    // Update intro
+    const introEl = document.querySelector(".page-intro");
+    if (introEl && text[lang]?.partners?.intro) {
+      introEl.textContent = text[lang].partners.intro;
+    }
+
+    // Update back link
+    const backEl = document.querySelector(".partners-back a");
+    if (backEl && text[lang]?.partners?.backToHome) {
+      backEl.textContent = text[lang].partners.backToHome;
+    }
+  });
+
+  const savedLang = localStorage.getItem("lang") || "zh";
+  if (savedLang !== "zh") {
+    reRenderPartners(savedLang);
+  }
+</script>
