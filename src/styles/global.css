@@ -480,12 +480,14 @@ main {
 }
 
 .contact-centered .contact-info {
-  max-width: 720px;
+  max-width: 480px;
   margin: 1.5rem auto 0;
+  display: grid;
+  grid-template-columns: max-content 1fr;
 }
 
 .contact-centered .contact-row {
-  text-align: left;
+  display: contents;
 }
 
 .contact-info {
@@ -513,6 +515,22 @@ main {
 .contact-value {
   color: #6b6560;
   font-size: 0.98rem;
+}
+
+/* Grid-mode overrides for centered contact layout */
+.contact-centered .contact-info .contact-label,
+.contact-centered .contact-info .contact-value {
+  padding: 1rem 0;
+  border-bottom: 1px solid rgba(180, 170, 160, 0.2);
+}
+
+.contact-centered .contact-info .contact-label {
+  padding-right: 2.5rem;
+}
+
+.contact-centered .contact-row:last-child .contact-label,
+.contact-centered .contact-row:last-child .contact-value {
+  border-bottom: none;
 }
 
 /* -------- Partners page -------- */
