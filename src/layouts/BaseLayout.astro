@@ -1,5 +1,6 @@
 ---
 import { text, defaultLang } from "../content/text.js";
+import "../styles/global.css";
 import "@fontsource/noto-sans-jp/300.css";
 import "@fontsource/noto-sans-jp/400.css";
 import "@fontsource/noto-sans-jp/500.css";
@@ -71,7 +72,6 @@ const canonicalURL = new URL(Astro.url.pathname, siteUrl).href;
       }
     })} />
 
-    <link rel="stylesheet" href="/styles/global.css" />
   </head>
   <body>
     <header>
