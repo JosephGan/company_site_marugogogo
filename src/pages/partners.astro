@@ -3,6 +3,7 @@ import Layout from "../layouts/BaseLayout.astro";
 import { text } from "../content/text.js";
 
 const t = text["zh"];
+const categoryOrder = ["regenerative", "beauty", "checkup", "nutrition"];
 ---
 
 <Layout
@@ -13,14 +14,36 @@ const t = text["zh"];
     <h1 data-i18n="partners.title">{t.partners.title}</h1>
     <p class="page-intro" data-i18n="partners.intro">{t.partners.intro}</p>
 
-    <div class="partners-grid" data-partners-grid>
-      {t.partners.items.map((partner) => (
-        <div class="partner-card">
-          <h2>{partner.name}</h2>
-          <p class="partner-name-en">{partner.nameEn}</p>
-          <p>{partner.description}</p>
-        </div>
-      ))}
+    <div data-partners-container>
+      {categoryOrder.map((cat) => {
+        const items = t.partners.items.filter((p) => p.category === cat);
+        if (!items.length) return null;
+        return (
+          <div class="partner-category">
+            <h2 class="partner-category-title">{t.partners.categories[cat]}</h2>
+            <div class="partners-grid">
+              {items.map((partner) => (
+                <div class="partner-card">
+                  {partner.image && (
+                    <img
+                      src={partner.image}
+                      alt={partner.name}
+                      class="partner-image"
+                      loading="lazy"
+                    />
+                  )}
+                  <div class="partner-card-body">
+                    <h2>{partner.name}</h2>
+                    <p class="partner-name-en">{partner.nameEn}</p>
+                    <p class="partner-location">{partner.location}</p>
+                    <p>{partner.description}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        );
+      })}
     </div>
 
     <div class="partners-back">
@@ -30,40 +53,52 @@ const t = text["zh"];
 </Layout>
 
 <script is:inline define:vars={{ text }}>
-  function reRenderPartners(lang) {
-    const grid = document.querySelector("[data-partners-grid]");
-    if (!grid || !text[lang]?.partners?.items) return;
+  const CATEGORY_ORDER = ["regenerative", "beauty", "checkup", "nutrition"];
 
-    grid.innerHTML = text[lang].partners.items
-      .map(
-        (partner) => `
-        <div class="partner-card">
-          <h2>${partner.name}</h2>
-          <p class="partner-name-en">${partner.nameEn}</p>
-          <p>${partner.description}</p>
+  function reRenderPartners(lang) {
+    const container = document.querySelector("[data-partners-container]");
+    if (!container || !text[lang]?.partners) return;
+
+    const { categories, items } = text[lang].partners;
+
+    container.innerHTML = CATEGORY_ORDER.map((cat) => {
+      const catItems = items.filter((p) => p.category === cat);
+      if (!catItems.length) return "";
+      return `
+        <div class="partner-category">
+          <h2 class="partner-category-title">${categories[cat]}</h2>
+          <div class="partners-grid">
+            ${catItems.map((partner) => `
+              <div class="partner-card">
+                ${partner.image ? `<img src="${partner.image}" alt="${partner.name}" class="partner-image" loading="lazy" />` : ""}
+                <div class="partner-card-body">
+                  <h2>${partner.name}</h2>
+                  <p class="partner-name-en">${partner.nameEn}</p>
+                  <p class="partner-location">${partner.location}</p>
+                  <p>${partner.description}</p>
+                </div>
+              </div>
+            `).join("")}
+          </div>
         </div>
-      `,
-      )
-      .join("");
+      `;
+    }).join("");
   }
 
   document.addEventListener("langchange", (e) => {
     const lang = e.detail.lang;
     reRenderPartners(lang);
 
-    // Update title
     const titleEl = document.querySelector("h1");
     if (titleEl && text[lang]?.partners?.title) {
       titleEl.textContent = text[lang].partners.title;
     }
 
-    // Update intro
     const introEl = document.querySelector(".page-intro");
     if (introEl && text[lang]?.partners?.intro) {
       introEl.textContent = text[lang].partners.intro;
     }
 
-    // Update back link
     const backEl = document.querySelector(".partners-back a");
     if (backEl && text[lang]?.partners?.backToHome) {
       backEl.textContent = text[lang].partners.backToHome;

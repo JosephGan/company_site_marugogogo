@@ -558,24 +558,51 @@ main {
   line-height: 1.9;
 }
 
+.partner-category {
+  margin-bottom: 3.5rem;
+}
+
+.partner-category-title {
+  font-family: "Noto Serif SC", "Noto Serif JP", serif;
+  font-size: clamp(1rem, 2vw, 1.25rem);
+  font-weight: 700;
+  color: #6b8f71;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 1.5rem;
+  padding-bottom: 0.6rem;
+  border-bottom: 1.5px solid rgba(107, 143, 113, 0.25);
+}
+
 .partners-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
   gap: 1.5rem;
-  margin-bottom: 3rem;
 }
 
 .partner-card {
   background: #ffffff;
   border: 1px solid rgba(180, 170, 160, 0.25);
   border-radius: 8px;
-  padding: 2rem;
+  overflow: hidden;
   transition: box-shadow 0.25s ease, border-color 0.25s ease;
 }
 
 .partner-card:hover {
   box-shadow: 0 4px 20px rgba(180, 170, 160, 0.15);
   border-color: rgba(107, 143, 113, 0.3);
+}
+
+.partner-image {
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  background: #f0ece6;
+}
+
+.partner-card-body {
+  padding: 2rem;
 }
 
 .partner-card h2 {
@@ -590,8 +617,15 @@ main {
 .partner-card .partner-name-en {
   font-size: 0.8rem;
   color: #9a948c;
-  margin-bottom: 1rem;
+  margin-bottom: 0.45rem;
   letter-spacing: 0.05em;
+}
+
+.partner-card .partner-location {
+  font-size: 0.82rem;
+  color: #6b8f71;
+  margin-bottom: 1rem;
+  letter-spacing: 0.04em;
 }
 
 .partner-card p {
