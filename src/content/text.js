@@ -73,7 +73,7 @@ export const text = {
     company: {
       email: "marugo@marugo-business.jp",
       phone: "03-xxxx-xxxx",
-      address: "東京都墨田区本所2-10-5 402号室",
+      address: "東京都墨田区本所2-10-5 302号室",
     },
     partners: {
       title: "合作医疗机构",
@@ -217,7 +217,7 @@ export const text = {
     company: {
       email: "marugo@marugo-business.jp",
       phone: "03-xxxx-xxxx",
-      address: "東京都墨田区本所2-10-5 402号室",
+      address: "東京都墨田区本所2-10-5 302号室",
     },
     partners: {
       title: "提携医療機関",
