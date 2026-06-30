@@ -48,7 +48,7 @@ const serviceImages = Object.fromEntries(
             <p>{item.desc}</p>
             {item.slug === "medical" && (
               <div class="medical-partners-link">
-                <a href="/partners" class="partners-link" data-i18n="home.medical.partnersLink">{t.home.medical.partnersLink}</a>
+                <a href="/medical" class="partners-link" data-i18n="home.medical.partnersLink">{t.home.medical.partnersLink}</a>
               </div>
             )}
           </div>
@@ -135,7 +135,7 @@ const serviceImages = Object.fromEntries(
         <div class="service-text">
           <h3>${item.title}</h3>
           <p>${item.desc}</p>
-          ${item.slug === "medical" && text[lang]?.home?.medical?.partnersLink ? `<div class="medical-partners-link"><a href="/partners" class="partners-link">${text[lang].home.medical.partnersLink}</a></div>` : ""}
+          ${item.slug === "medical" && text[lang]?.home?.medical?.partnersLink ? `<div class="medical-partners-link"><a href="/medical" class="partners-link">${text[lang].home.medical.partnersLink}</a></div>` : ""}
         </div>
         <div class="service-image">
           <div class="slideshow" data-slug="${item.slug}">

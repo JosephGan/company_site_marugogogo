@@ -558,6 +558,518 @@ main {
   line-height: 1.9;
 }
 
+.medical-service-page {
+  max-width: 1080px;
+  margin: 0 auto;
+}
+
+.medical-service-hero {
+  text-align: center;
+  margin-bottom: 3.5rem;
+}
+
+.medical-service-eyebrow {
+  color: #6b8f71;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  margin-bottom: 0.65rem;
+}
+
+.medical-tab-shell {
+  margin-top: 2rem;
+}
+
+.medical-tab-list {
+  position: sticky;
+  top: 72px;
+  z-index: 20;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.5rem;
+  max-width: 760px;
+  margin: 0 auto 2.4rem;
+  padding: 0.45rem;
+  background: rgba(250, 248, 245, 0.92);
+  border: 1px solid rgba(180, 170, 160, 0.24);
+  border-radius: 8px;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.medical-tab {
+  border: 1px solid transparent;
+  border-radius: 6px;
+  background: transparent;
+  color: #6b6560;
+  cursor: pointer;
+  font: inherit;
+  font-size: 0.9rem;
+  font-weight: 600;
+  line-height: 1.4;
+  padding: 0.75rem 0.65rem;
+  transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+}
+
+.medical-tab:hover {
+  background: rgba(255, 255, 255, 0.65);
+  border-color: rgba(180, 170, 160, 0.28);
+}
+
+.medical-tab.active {
+  background: #ffffff;
+  border-color: rgba(107, 143, 113, 0.34);
+  color: #5f8467;
+  box-shadow: 0 4px 16px rgba(180, 170, 160, 0.14);
+}
+
+.medical-tab-panel {
+  display: none;
+}
+
+.medical-tab-panel.active {
+  display: block;
+  animation: fadeUp 0.35s ease both;
+}
+
+.medical-service-block {
+  margin-bottom: 4rem;
+}
+
+.professional-service-block .medical-step-en {
+  color: #5f8467;
+}
+
+.regenerative-service-block .medical-step-en {
+  color: #597f8f;
+}
+
+.aesthetic-service-block .medical-step-en {
+  color: #8c6f82;
+}
+
+.medical-section-heading {
+  max-width: 720px;
+  margin: 0 auto 2rem;
+  text-align: center;
+}
+
+.medical-section-heading.compact {
+  margin-bottom: 1.4rem;
+}
+
+.medical-section-heading h2 {
+  font-family: "Noto Serif SC", "Noto Serif JP", serif;
+  font-size: clamp(1.2rem, 2.5vw, 1.7rem);
+  font-weight: 700;
+  color: #2d2a26;
+  letter-spacing: 0.04em;
+  margin-bottom: 0.75rem;
+}
+
+.medical-section-heading p {
+  color: #6b6560;
+  font-size: 0.94rem;
+  line-height: 1.9;
+}
+
+.medical-timeline {
+  position: relative;
+  display: grid;
+  gap: 1.25rem;
+}
+
+.medical-timeline::before {
+  content: "";
+  position: absolute;
+  left: 2rem;
+  top: 1.5rem;
+  bottom: 1.5rem;
+  width: 1px;
+  background: rgba(107, 143, 113, 0.2);
+}
+
+.medical-step {
+  position: relative;
+  display: grid;
+  grid-template-columns: 4rem 1fr;
+  gap: 1rem;
+  align-items: start;
+}
+
+.medical-step-number {
+  position: relative;
+  z-index: 1;
+  width: 4rem;
+  height: 4rem;
+  border-radius: 50%;
+  border: 1px solid rgba(107, 143, 113, 0.35);
+  background: #faf8f5;
+  color: #6b8f71;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "Noto Serif SC", "Noto Serif JP", serif;
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+}
+
+.medical-step-body {
+  background: #ffffff;
+  border: 1px solid rgba(180, 170, 160, 0.24);
+  border-radius: 8px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 18px rgba(180, 170, 160, 0.1);
+}
+
+.medical-step-en {
+  color: #9a948c;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 0.35rem;
+}
+
+.medical-step-body h3 {
+  font-family: "Noto Serif SC", "Noto Serif JP", serif;
+  font-size: 1.12rem;
+  color: #2d2a26;
+  letter-spacing: 0.03em;
+  margin-bottom: 0.6rem;
+}
+
+.medical-step-body p {
+  color: #6b6560;
+  font-size: 0.92rem;
+  line-height: 1.85;
+  margin-bottom: 0.9rem;
+}
+
+.medical-step-body ul {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.45rem 1rem;
+  list-style: none;
+}
+
+.medical-step-body li,
+.medical-advantage-grid span,
+.medical-chip-grid span {
+  position: relative;
+  color: #5d5751;
+  font-size: 0.88rem;
+  line-height: 1.6;
+}
+
+.medical-step-body li {
+  padding-left: 1rem;
+}
+
+.medical-step-body li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.72em;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: rgba(107, 143, 113, 0.7);
+}
+
+.medical-flow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.7rem;
+  justify-content: center;
+  list-style: none;
+  counter-reset: medical-flow;
+}
+
+.medical-flow-diagram {
+  position: relative;
+  align-items: stretch;
+  margin: 0 auto 2.2rem;
+}
+
+.medical-flow li {
+  counter-increment: medical-flow;
+  position: relative;
+  background: #ffffff;
+  border: 1px solid rgba(180, 170, 160, 0.28);
+  border-radius: 6px;
+  padding: 0.65rem 0.85rem 0.65rem 2.1rem;
+  color: #5d5751;
+  font-size: 0.84rem;
+  line-height: 1.5;
+}
+
+.medical-flow-diagram li {
+  flex: 1 1 190px;
+  min-height: 4.2rem;
+  display: flex;
+  align-items: center;
+  box-shadow: 0 4px 16px rgba(180, 170, 160, 0.12);
+}
+
+.medical-flow li::before {
+  content: counter(medical-flow, decimal-leading-zero);
+  position: absolute;
+  left: 0.75rem;
+  top: 0.68rem;
+  color: #6b8f71;
+  font-size: 0.72rem;
+  font-weight: 700;
+}
+
+.medical-flow-diagram li:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  right: -0.55rem;
+  top: 50%;
+  width: 0.7rem;
+  height: 1px;
+  background: rgba(107, 143, 113, 0.32);
+}
+
+.medical-chip-grid,
+.medical-advantage-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 0.75rem;
+}
+
+.medical-chip-grid span,
+.medical-advantage-grid span {
+  display: block;
+  background: rgba(255, 255, 255, 0.72);
+  border: 1px solid rgba(180, 170, 160, 0.24);
+  border-radius: 6px;
+  padding: 0.75rem 0.95rem;
+}
+
+.medical-chip-grid span {
+  color: #6b8f71;
+  font-weight: 500;
+}
+
+.medical-advantage-grid span {
+  background: #ffffff;
+}
+
+.medical-hospital-groups {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.25rem;
+}
+
+.medical-hospital-group {
+  background: #ffffff;
+  border: 1px solid rgba(180, 170, 160, 0.24);
+  border-radius: 8px;
+  padding: 1.5rem;
+}
+
+.medical-hospital-group h3 {
+  font-family: "Noto Serif SC", "Noto Serif JP", serif;
+  color: #2d2a26;
+  font-size: 1rem;
+  letter-spacing: 0.04em;
+  margin-bottom: 1rem;
+}
+
+.medical-hospital-group ul {
+  list-style: none;
+  display: grid;
+  gap: 0.65rem;
+}
+
+.medical-hospital-group li {
+  color: #6b6560;
+  font-size: 0.9rem;
+  line-height: 1.55;
+  padding-bottom: 0.65rem;
+  border-bottom: 1px solid rgba(180, 170, 160, 0.18);
+}
+
+.medical-hospital-group li:last-child {
+  padding-bottom: 0;
+  border-bottom: none;
+}
+
+.aesthetic-service-block {
+  padding-top: 0.5rem;
+}
+
+.professional-service-block .medical-step-body {
+  border-left: 3px solid rgba(95, 132, 103, 0.42);
+}
+
+.regenerative-service-block {
+  padding-top: 0.5rem;
+}
+
+.regenerative-service-block .medical-feature-kicker,
+.regenerative-service-block .aesthetic-flow-card > p,
+.regenerative-service-block .medical-chip-grid span {
+  color: #597f8f;
+}
+
+.regenerative-service-block .medical-feature-section,
+.regenerative-service-block .aesthetic-flow-card,
+.regenerative-service-block .medical-hospital-group {
+  border-left: 3px solid rgba(89, 128, 150, 0.32);
+}
+
+.aesthetic-service-block .medical-feature-kicker,
+.aesthetic-service-block .aesthetic-flow-card > p,
+.aesthetic-service-block .medical-chip-grid span {
+  color: #8c6f82;
+}
+
+.aesthetic-service-block .medical-feature-section,
+.aesthetic-service-block .aesthetic-flow-card,
+.aesthetic-service-block .medical-hospital-group {
+  border-left: 3px solid rgba(140, 111, 130, 0.28);
+}
+
+.aesthetic-section-stack {
+  display: grid;
+  gap: 1.2rem;
+}
+
+.medical-feature-section {
+  background: rgba(255, 255, 255, 0.72);
+  border: 1px solid rgba(180, 170, 160, 0.24);
+  border-radius: 8px;
+  padding: clamp(1.25rem, 3vw, 1.8rem);
+}
+
+.medical-feature-section h3 {
+  font-family: "Noto Serif SC", "Noto Serif JP", serif;
+  color: #2d2a26;
+  font-size: 1.08rem;
+  letter-spacing: 0.04em;
+  margin-bottom: 0.8rem;
+}
+
+.medical-feature-section p {
+  color: #6b6560;
+  font-size: 0.92rem;
+  line-height: 1.9;
+  margin-bottom: 0.9rem;
+}
+
+.medical-feature-section p:last-child {
+  margin-bottom: 0;
+}
+
+.medical-feature-kicker {
+  color: #6b8f71 !important;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+}
+
+.medical-feature-section .medical-chip-grid,
+.medical-feature-section .medical-advantage-grid,
+.medical-feature-section .medical-hospital-groups,
+.medical-feature-section .aesthetic-flow-grid {
+  margin: 1rem 0;
+}
+
+.aesthetic-flow-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.aesthetic-flow-card {
+  background: #ffffff;
+  border: 1px solid rgba(180, 170, 160, 0.24);
+  border-radius: 8px;
+  padding: 1.2rem;
+}
+
+.aesthetic-flow-card > p {
+  color: #6b8f71;
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 0.35rem;
+}
+
+.aesthetic-flow-card h4 {
+  font-family: "Noto Serif SC", "Noto Serif JP", serif;
+  color: #2d2a26;
+  font-size: 1rem;
+  letter-spacing: 0.03em;
+  margin-bottom: 0.55rem;
+}
+
+.aesthetic-flow-card span {
+  display: block;
+  color: #6b6560;
+  font-size: 0.88rem;
+  line-height: 1.8;
+}
+
+.aesthetic-flow-card ul {
+  display: grid;
+  gap: 0.35rem;
+  list-style: none;
+  margin-top: 0.8rem;
+}
+
+.aesthetic-flow-card li {
+  position: relative;
+  color: #5d5751;
+  font-size: 0.86rem;
+  line-height: 1.6;
+  padding-left: 1rem;
+}
+
+.aesthetic-flow-card li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.72em;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: rgba(107, 143, 113, 0.7);
+}
+
+.regenerative-service-block .aesthetic-flow-card li::before {
+  background: rgba(89, 128, 150, 0.72);
+}
+
+.regenerative-service-block .medical-flow li::before {
+  color: #597f8f;
+}
+
+.regenerative-service-block .medical-flow-diagram li:not(:last-child)::after {
+  background: rgba(89, 128, 150, 0.32);
+}
+
+.aesthetic-service-block .aesthetic-flow-card li::before {
+  background: rgba(140, 111, 130, 0.68);
+}
+
+.aesthetic-service-block .medical-flow li::before {
+  color: #8c6f82;
+}
+
+.regenerative-coverage-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.partner-list-heading {
+  margin-top: 4.5rem;
+}
+
 .partner-category {
   margin-bottom: 3.5rem;
 }
@@ -722,5 +1234,97 @@ footer {
 
   .partners-grid {
     grid-template-columns: 1fr;
+  }
+
+  .partners-section {
+    padding: 3rem 1.2rem;
+  }
+
+  .medical-service-hero {
+    margin-bottom: 2.6rem;
+  }
+
+  .medical-tab-list {
+    position: static;
+    grid-template-columns: 1fr;
+    margin-bottom: 2rem;
+  }
+
+  .medical-tab {
+    text-align: left;
+    padding: 0.8rem 0.9rem;
+  }
+
+  .medical-service-block {
+    margin-bottom: 3rem;
+  }
+
+  .medical-section-heading {
+    text-align: left;
+    margin-bottom: 1.4rem;
+  }
+
+  .medical-section-heading.compact {
+    margin-bottom: 1rem;
+  }
+
+  .medical-timeline::before {
+    left: 1.35rem;
+  }
+
+  .medical-step {
+    grid-template-columns: 2.7rem 1fr;
+    gap: 0.8rem;
+  }
+
+  .medical-step-number {
+    width: 2.7rem;
+    height: 2.7rem;
+    font-size: 0.78rem;
+  }
+
+  .medical-step-body {
+    padding: 1.15rem;
+  }
+
+  .medical-step-body ul {
+    grid-template-columns: 1fr;
+  }
+
+  .medical-flow {
+    justify-content: flex-start;
+  }
+
+  .medical-flow li {
+    width: 100%;
+  }
+
+  .medical-flow-diagram li {
+    min-height: auto;
+  }
+
+  .medical-flow-diagram li:not(:last-child)::after {
+    left: 1.05rem;
+    right: auto;
+    top: auto;
+    bottom: -0.75rem;
+    width: 1px;
+    height: 0.75rem;
+  }
+
+  .medical-chip-grid,
+  .medical-advantage-grid,
+  .medical-hospital-groups,
+  .regenerative-coverage-grid,
+  .aesthetic-flow-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .medical-feature-section {
+    padding: 1.15rem;
+  }
+
+  .partner-list-heading {
+    margin-top: 3.2rem;
   }
 }

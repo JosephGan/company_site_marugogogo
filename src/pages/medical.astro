@@ -1,0 +1,497 @@
+---
+import Layout from "../layouts/BaseLayout.astro";
+import { text } from "../content/text.js";
+
+const t = text["zh"];
+const page = t.medicalPage;
+const medical = t.partners.medicalService;
+const regenerative = t.partners.regenerativeService;
+const aesthetic = t.partners.aestheticService;
+const partnerLabels = page.partnerSections;
+const partnerItems = t.partners.items;
+const criticalPartners = partnerItems.filter((item) => item.category === "checkup");
+const regenerativePartners = partnerItems.filter((item) => item.category === "regenerative");
+const aestheticPartners = partnerItems.filter((item) => ["beauty", "nutrition"].includes(item.category));
+---
+
+<Layout
+  title="来日医疗服务"
+  description="丸五株式会社来日医疗服务，涵盖大病医疗 Second Opinion、再生医疗、高端医疗美容与精密体检。"
+>
+  <section class="partners-section medical-service-page">
+    <div class="medical-service-hero">
+      <p class="medical-service-eyebrow" data-medical-eyebrow>{page.eyebrow}</p>
+      <h1 data-medical-title>{page.title}</h1>
+      <p class="page-intro" data-medical-intro>{page.intro}</p>
+    </div>
+
+    <div class="medical-tab-shell">
+      <div class="medical-tab-list" role="tablist" aria-label="Medical service chapters">
+        <button class="medical-tab active" type="button" data-medical-tab="critical">{page.tabs.critical}</button>
+        <button class="medical-tab" type="button" data-medical-tab="regenerative">{page.tabs.regenerative}</button>
+        <button class="medical-tab" type="button" data-medical-tab="aesthetic">{page.tabs.aesthetic}</button>
+      </div>
+
+      <div data-medical-tabs-container>
+        <section class="medical-tab-panel active" data-medical-panel="critical">
+          <section class="medical-service-block professional-service-block">
+            <div class="medical-section-heading">
+              <h2>{medical.processTitle}</h2>
+              <p>{medical.processIntro}</p>
+            </div>
+            <div class="medical-timeline">
+              {medical.processSteps.map((step) => (
+                <article class="medical-step">
+                  <div class="medical-step-number">{step.number}</div>
+                  <div class="medical-step-body">
+                    <p class="medical-step-en">{step.titleEn}</p>
+                    <h3>{step.title}</h3>
+                    <p>{step.desc}</p>
+                    <ul>
+                      {step.services.map((service) => <li>{service}</li>)}
+                    </ul>
+                  </div>
+                </article>
+              ))}
+            </div>
+          </section>
+
+          <section class="medical-service-block">
+            <div class="medical-section-heading compact">
+              <h2>{medical.specialtiesTitle}</h2>
+            </div>
+            <div class="medical-chip-grid">
+              {medical.specialties.map((item) => <span>{item}</span>)}
+            </div>
+          </section>
+
+          <section class="medical-service-block">
+            <div class="medical-section-heading">
+              <h2>{medical.advantagesTitle}</h2>
+              <p>{medical.advantagesIntro}</p>
+            </div>
+            <div class="medical-advantage-grid">
+              {medical.advantages.map((item) => <span>{item}</span>)}
+            </div>
+          </section>
+
+          <section class="medical-service-block">
+            <div class="medical-section-heading compact">
+              <h2>{medical.hospitalsTitle}</h2>
+            </div>
+            <div class="medical-hospital-groups">
+              <div class="medical-hospital-group">
+                <h3>{medical.universityHospitalsTitle}</h3>
+                <ul>
+                  {medical.universityHospitals.map((hospital) => <li>{hospital}</li>)}
+                </ul>
+              </div>
+              <div class="medical-hospital-group">
+                <h3>{medical.cancerHospitalsTitle}</h3>
+                <ul>
+                  {medical.cancerHospitals.map((hospital) => <li>{hospital}</li>)}
+                </ul>
+              </div>
+            </div>
+          </section>
+
+          <section class="medical-service-block medical-partner-showcase">
+            <div class="medical-section-heading">
+              <h2>{partnerLabels.criticalTitle}</h2>
+              <p>{partnerLabels.criticalIntro}</p>
+            </div>
+            <div class="partners-grid">
+              {criticalPartners.map((partner) => (
+                <article class="partner-card">
+                  <img class="partner-image" src={partner.image} alt={partner.name} loading="lazy" />
+                  <div class="partner-card-body">
+                    <h2>{partner.name}</h2>
+                    <div class="partner-name-en">{partner.nameEn}</div>
+                    <div class="partner-location">{partner.location}</div>
+                    <p>{partner.description}</p>
+                  </div>
+                </article>
+              ))}
+            </div>
+          </section>
+        </section>
+
+        <section class="medical-tab-panel" data-medical-panel="regenerative">
+          <section class="medical-service-block regenerative-service-block">
+            <div class="medical-section-heading">
+              <p class="medical-step-en">{regenerative.titleEn}</p>
+              <h2>{regenerative.title}</h2>
+            </div>
+
+            <div class="aesthetic-section-stack">
+              <section class="medical-feature-section">
+                <h3>{regenerative.introTitle}</h3>
+                {regenerative.intro.map((paragraph) => <p>{paragraph}</p>)}
+              </section>
+
+              <section class="medical-feature-section">
+                <h3>{regenerative.audienceTitle}</h3>
+                <p>{regenerative.audienceIntro}</p>
+                <div class="medical-chip-grid">
+                  {regenerative.audience.map((item) => <span>{item}</span>)}
+                </div>
+              </section>
+
+              <section class="medical-feature-section">
+                <h3>{regenerative.projectsTitle}</h3>
+                <p>{regenerative.projectsIntro}</p>
+                <div class="medical-hospital-groups">
+                  {regenerative.projectGroups.map((group) => (
+                    <div class="medical-hospital-group">
+                      <h3>{group.title}</h3>
+                      <p>{group.intro}</p>
+                      <ul>
+                        {group.items.map((item) => <li>{item}</li>)}
+                      </ul>
+                    </div>
+                  ))}
+                </div>
+              </section>
+
+              <section class="medical-feature-section">
+                <h3>{regenerative.flowTitle}</h3>
+                <div class="aesthetic-flow-grid">
+                  {regenerative.flow.map((step) => (
+                    <article class="aesthetic-flow-card">
+                      <p>{step.number}</p>
+                      <h4>{step.title}</h4>
+                      <span>{step.desc}</span>
+                      {step.services.length > 0 && (
+                        <ul>
+                          {step.services.map((item) => <li>{item}</li>)}
+                        </ul>
+                      )}
+                    </article>
+                  ))}
+                </div>
+              </section>
+
+              <section class="medical-feature-section">
+                <h3>{regenerative.networkTitle}</h3>
+                <p>{regenerative.networkIntro}</p>
+              </section>
+
+              <section class="medical-feature-section">
+                <h3>{regenerative.partnerTitle}</h3>
+                <div class="medical-hospital-groups">
+                  {regenerative.partnerRegions.map((region) => (
+                    <div class="medical-hospital-group">
+                      <h3>{region.region}</h3>
+                      <div class="medical-chip-grid">
+                        {region.institutions.map((item) => <span>{item}</span>)}
+                      </div>
+                      <p>{region.desc}</p>
+                    </div>
+                  ))}
+                </div>
+              </section>
+
+              <section class="medical-feature-section">
+                <h3>{regenerative.coverageTitle}</h3>
+                <p>{regenerative.coverageIntro}</p>
+                <div class="medical-hospital-groups regenerative-coverage-grid">
+                  {regenerative.coverageGroups.map((group) => (
+                    <div class="medical-hospital-group">
+                      <h3>{group.title}</h3>
+                      <ul>
+                        {group.items.map((item) => <li>{item}</li>)}
+                      </ul>
+                    </div>
+                  ))}
+                </div>
+              </section>
+
+              <section class="medical-feature-section">
+                <h3>{regenerative.advantagesTitle}</h3>
+                <p>{regenerative.advantagesIntro}</p>
+                <div class="medical-advantage-grid">
+                  {regenerative.advantages.map((item) => <span>{item}</span>)}
+                </div>
+                <p>{regenerative.closing}</p>
+              </section>
+            </div>
+          </section>
+
+          <section class="medical-service-block medical-partner-showcase">
+            <div class="medical-section-heading">
+              <h2>{partnerLabels.regenerativeTitle}</h2>
+              <p>{partnerLabels.regenerativeIntro}</p>
+            </div>
+            <div class="partners-grid">
+              {regenerativePartners.map((partner) => (
+                <article class="partner-card">
+                  <img class="partner-image" src={partner.image} alt={partner.name} loading="lazy" />
+                  <div class="partner-card-body">
+                    <h2>{partner.name}</h2>
+                    <div class="partner-name-en">{partner.nameEn}</div>
+                    <div class="partner-location">{partner.location}</div>
+                    <p>{partner.description}</p>
+                  </div>
+                </article>
+              ))}
+            </div>
+          </section>
+        </section>
+
+        <section class="medical-tab-panel" data-medical-panel="aesthetic">
+          <section class="medical-service-block aesthetic-service-block">
+            <div class="medical-section-heading">
+              <p class="medical-step-en">{aesthetic.titleEn}</p>
+              <h2>{aesthetic.title}</h2>
+            </div>
+
+            <div class="aesthetic-section-stack">
+              <section class="medical-feature-section">
+                <h3>{aesthetic.beautyTitle}</h3>
+                {aesthetic.beautyIntro.map((paragraph) => <p>{paragraph}</p>)}
+              </section>
+
+              <section class="medical-feature-section">
+                <h3>{aesthetic.serviceFlowTitle}</h3>
+                <div class="aesthetic-flow-grid">
+                  {aesthetic.serviceFlow.map((step) => (
+                    <article class="aesthetic-flow-card">
+                      <p>{step.number}</p>
+                      <h4>{step.title}</h4>
+                      <span>{step.desc}</span>
+                      {step.services.length > 0 && (
+                        <ul>
+                          {step.services.map((item) => <li>{item}</li>)}
+                        </ul>
+                      )}
+                    </article>
+                  ))}
+                </div>
+              </section>
+
+              <section class="medical-feature-section">
+                <h3>{aesthetic.partnerTitle}</h3>
+                <p class="medical-feature-kicker">{aesthetic.partnerRegion}</p>
+                <div class="medical-chip-grid">
+                  {aesthetic.partnerInstitutions.map((item) => <span>{item}</span>)}
+                </div>
+                <p>{aesthetic.partnerDesc}</p>
+              </section>
+
+              <section class="medical-feature-section">
+                <h3>{aesthetic.beautyProjectsTitle}</h3>
+                <p>{aesthetic.beautyProjectsIntro}</p>
+                <div class="medical-hospital-groups">
+                  {aesthetic.beautyProjects.map((group) => (
+                    <div class="medical-hospital-group">
+                      <h3>{group.title}</h3>
+                      <ul>
+                        {group.items.map((item) => <li>{item}</li>)}
+                      </ul>
+                    </div>
+                  ))}
+                </div>
+              </section>
+
+              <section class="medical-feature-section">
+                <h3>{aesthetic.screeningTitle}</h3>
+                {aesthetic.screeningIntro.map((paragraph) => <p>{paragraph}</p>)}
+              </section>
+
+              <section class="medical-feature-section">
+                <h3>{aesthetic.screeningProjectsTitle}</h3>
+                <p>{aesthetic.screeningProjectsIntro}</p>
+                <div class="medical-chip-grid">
+                  {aesthetic.screeningProjects.map((item) => <span>{item}</span>)}
+                </div>
+                <p>{aesthetic.screeningNote}</p>
+              </section>
+
+              <section class="medical-feature-section">
+                <h3>{aesthetic.coordinationTitle}</h3>
+                <p>{aesthetic.coordinationIntro}</p>
+                <div class="medical-advantage-grid">
+                  {aesthetic.coordinationItems.map((item) => <span>{item}</span>)}
+                </div>
+                <p>{aesthetic.closing}</p>
+              </section>
+            </div>
+          </section>
+
+          <section class="medical-service-block medical-partner-showcase">
+            <div class="medical-section-heading">
+              <h2>{partnerLabels.aestheticTitle}</h2>
+              <p>{partnerLabels.aestheticIntro}</p>
+            </div>
+            <div class="partners-grid">
+              {aestheticPartners.map((partner) => (
+                <article class="partner-card">
+                  <img class="partner-image" src={partner.image} alt={partner.name} loading="lazy" />
+                  <div class="partner-card-body">
+                    <h2>{partner.name}</h2>
+                    <div class="partner-name-en">{partner.nameEn}</div>
+                    <div class="partner-location">{partner.location}</div>
+                    <p>{partner.description}</p>
+                  </div>
+                </article>
+              ))}
+            </div>
+          </section>
+        </section>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<script is:inline define:vars={{ text }}>
+  function renderStepCards(steps) {
+    return `<div class="aesthetic-flow-grid">${steps.map((step) => `
+      <article class="aesthetic-flow-card">
+        <p>${step.number}</p>
+        <h4>${step.title}</h4>
+        <span>${step.desc}</span>
+        ${step.services.length > 0 ? `<ul>${step.services.map((item) => `<li>${item}</li>`).join("")}</ul>` : ""}
+      </article>
+    `).join("")}</div>`;
+  }
+
+  function getPartnerItems(partners, categories) {
+    return partners.items.filter((item) => categories.includes(item.category));
+  }
+
+  function renderPartnerCards(items) {
+    return `<div class="partners-grid">${items.map((partner) => `
+      <article class="partner-card">
+        <img class="partner-image" src="${partner.image}" alt="${partner.name}" loading="lazy" />
+        <div class="partner-card-body">
+          <h2>${partner.name}</h2>
+          <div class="partner-name-en">${partner.nameEn}</div>
+          <div class="partner-location">${partner.location}</div>
+          <p>${partner.description}</p>
+        </div>
+      </article>
+    `).join("")}</div>`;
+  }
+
+  function renderPartnerShowcase(title, intro, items) {
+    if (!items.length) return "";
+
+    return `
+      <section class="medical-service-block medical-partner-showcase">
+        <div class="medical-section-heading"><h2>${title}</h2><p>${intro}</p></div>
+        ${renderPartnerCards(items)}
+      </section>
+    `;
+  }
+
+  function renderCritical(service, partners, labels) {
+    return `
+      <section class="medical-tab-panel active" data-medical-panel="critical">
+        <section class="medical-service-block professional-service-block">
+          <div class="medical-section-heading"><h2>${service.processTitle}</h2><p>${service.processIntro}</p></div>
+          <div class="medical-timeline">
+            ${service.processSteps.map((step) => `
+              <article class="medical-step">
+                <div class="medical-step-number">${step.number}</div>
+                <div class="medical-step-body">
+                  <p class="medical-step-en">${step.titleEn}</p>
+                  <h3>${step.title}</h3>
+                  <p>${step.desc}</p>
+                  <ul>${step.services.map((item) => `<li>${item}</li>`).join("")}</ul>
+                </div>
+              </article>
+            `).join("")}
+          </div>
+        </section>
+        <section class="medical-service-block"><div class="medical-section-heading compact"><h2>${service.specialtiesTitle}</h2></div><div class="medical-chip-grid">${service.specialties.map((item) => `<span>${item}</span>`).join("")}</div></section>
+        <section class="medical-service-block"><div class="medical-section-heading"><h2>${service.advantagesTitle}</h2><p>${service.advantagesIntro}</p></div><div class="medical-advantage-grid">${service.advantages.map((item) => `<span>${item}</span>`).join("")}</div></section>
+        <section class="medical-service-block"><div class="medical-section-heading compact"><h2>${service.hospitalsTitle}</h2></div><div class="medical-hospital-groups"><div class="medical-hospital-group"><h3>${service.universityHospitalsTitle}</h3><ul>${service.universityHospitals.map((item) => `<li>${item}</li>`).join("")}</ul></div><div class="medical-hospital-group"><h3>${service.cancerHospitalsTitle}</h3><ul>${service.cancerHospitals.map((item) => `<li>${item}</li>`).join("")}</ul></div></div></section>
+        ${renderPartnerShowcase(labels.criticalTitle, labels.criticalIntro, getPartnerItems(partners, ["checkup"]))}
+      </section>
+    `;
+  }
+
+  function renderRegenerative(service, partners, labels) {
+    return `
+      <section class="medical-tab-panel" data-medical-panel="regenerative">
+        <section class="medical-service-block regenerative-service-block">
+          <div class="medical-section-heading"><p class="medical-step-en">${service.titleEn}</p><h2>${service.title}</h2></div>
+          <div class="aesthetic-section-stack">
+            <section class="medical-feature-section"><h3>${service.introTitle}</h3>${service.intro.map((p) => `<p>${p}</p>`).join("")}</section>
+            <section class="medical-feature-section"><h3>${service.audienceTitle}</h3><p>${service.audienceIntro}</p><div class="medical-chip-grid">${service.audience.map((item) => `<span>${item}</span>`).join("")}</div></section>
+            <section class="medical-feature-section"><h3>${service.projectsTitle}</h3><p>${service.projectsIntro}</p><div class="medical-hospital-groups">${service.projectGroups.map((group) => `<div class="medical-hospital-group"><h3>${group.title}</h3><p>${group.intro}</p><ul>${group.items.map((item) => `<li>${item}</li>`).join("")}</ul></div>`).join("")}</div></section>
+            <section class="medical-feature-section"><h3>${service.flowTitle}</h3>${renderStepCards(service.flow)}</section>
+            <section class="medical-feature-section"><h3>${service.networkTitle}</h3><p>${service.networkIntro}</p></section>
+            <section class="medical-feature-section"><h3>${service.partnerTitle}</h3><div class="medical-hospital-groups">${service.partnerRegions.map((region) => `<div class="medical-hospital-group"><h3>${region.region}</h3><div class="medical-chip-grid">${region.institutions.map((item) => `<span>${item}</span>`).join("")}</div><p>${region.desc}</p></div>`).join("")}</div></section>
+            <section class="medical-feature-section"><h3>${service.coverageTitle}</h3><p>${service.coverageIntro}</p><div class="medical-hospital-groups regenerative-coverage-grid">${service.coverageGroups.map((group) => `<div class="medical-hospital-group"><h3>${group.title}</h3><ul>${group.items.map((item) => `<li>${item}</li>`).join("")}</ul></div>`).join("")}</div></section>
+            <section class="medical-feature-section"><h3>${service.advantagesTitle}</h3><p>${service.advantagesIntro}</p><div class="medical-advantage-grid">${service.advantages.map((item) => `<span>${item}</span>`).join("")}</div><p>${service.closing}</p></section>
+          </div>
+        </section>
+        ${renderPartnerShowcase(labels.regenerativeTitle, labels.regenerativeIntro, getPartnerItems(partners, ["regenerative"]))}
+      </section>
+    `;
+  }
+
+  function renderAesthetic(service, partners, labels) {
+    return `
+      <section class="medical-tab-panel" data-medical-panel="aesthetic">
+        <section class="medical-service-block aesthetic-service-block">
+          <div class="medical-section-heading"><p class="medical-step-en">${service.titleEn}</p><h2>${service.title}</h2></div>
+          <div class="aesthetic-section-stack">
+            <section class="medical-feature-section"><h3>${service.beautyTitle}</h3>${service.beautyIntro.map((p) => `<p>${p}</p>`).join("")}</section>
+            <section class="medical-feature-section"><h3>${service.serviceFlowTitle}</h3>${renderStepCards(service.serviceFlow)}</section>
+            <section class="medical-feature-section"><h3>${service.partnerTitle}</h3><p class="medical-feature-kicker">${service.partnerRegion}</p><div class="medical-chip-grid">${service.partnerInstitutions.map((item) => `<span>${item}</span>`).join("")}</div><p>${service.partnerDesc}</p></section>
+            <section class="medical-feature-section"><h3>${service.beautyProjectsTitle}</h3><p>${service.beautyProjectsIntro}</p><div class="medical-hospital-groups">${service.beautyProjects.map((group) => `<div class="medical-hospital-group"><h3>${group.title}</h3><ul>${group.items.map((item) => `<li>${item}</li>`).join("")}</ul></div>`).join("")}</div></section>
+            <section class="medical-feature-section"><h3>${service.screeningTitle}</h3>${service.screeningIntro.map((p) => `<p>${p}</p>`).join("")}</section>
+            <section class="medical-feature-section"><h3>${service.screeningProjectsTitle}</h3><p>${service.screeningProjectsIntro}</p><div class="medical-chip-grid">${service.screeningProjects.map((item) => `<span>${item}</span>`).join("")}</div><p>${service.screeningNote}</p></section>
+            <section class="medical-feature-section"><h3>${service.coordinationTitle}</h3><p>${service.coordinationIntro}</p><div class="medical-advantage-grid">${service.coordinationItems.map((item) => `<span>${item}</span>`).join("")}</div><p>${service.closing}</p></section>
+          </div>
+        </section>
+        ${renderPartnerShowcase(labels.aestheticTitle, labels.aestheticIntro, getPartnerItems(partners, ["beauty", "nutrition"]))}
+      </section>
+    `;
+  }
+
+  function activateMedicalTab(name) {
+    document.querySelectorAll("[data-medical-tab]").forEach((button) => {
+      button.classList.toggle("active", button.dataset.medicalTab === name);
+    });
+    document.querySelectorAll("[data-medical-panel]").forEach((panel) => {
+      panel.classList.toggle("active", panel.dataset.medicalPanel === name);
+    });
+  }
+
+  function bindMedicalTabs() {
+    document.querySelectorAll("[data-medical-tab]").forEach((button) => {
+      button.addEventListener("click", () => activateMedicalTab(button.dataset.medicalTab));
+    });
+  }
+
+  function renderMedicalPage(lang) {
+    const data = text[lang];
+    if (!data?.medicalPage || !data?.partners?.medicalService) return;
+
+    document.querySelector("[data-medical-eyebrow]").textContent = data.medicalPage.eyebrow;
+    document.querySelector("[data-medical-title]").textContent = data.medicalPage.title;
+    document.querySelector("[data-medical-intro]").textContent = data.medicalPage.intro;
+    document.querySelector('[data-medical-tab="critical"]').textContent = data.medicalPage.tabs.critical;
+    document.querySelector('[data-medical-tab="regenerative"]').textContent = data.medicalPage.tabs.regenerative;
+    document.querySelector('[data-medical-tab="aesthetic"]').textContent = data.medicalPage.tabs.aesthetic;
+
+    const active = document.querySelector("[data-medical-tab].active")?.dataset.medicalTab || "critical";
+    document.querySelector("[data-medical-tabs-container]").innerHTML = [
+      renderCritical(data.partners.medicalService, data.partners, data.medicalPage.partnerSections),
+      renderRegenerative(data.partners.regenerativeService, data.partners, data.medicalPage.partnerSections),
+      renderAesthetic(data.partners.aestheticService, data.partners, data.medicalPage.partnerSections),
+    ].join("");
+    activateMedicalTab(active);
+  }
+
+  bindMedicalTabs();
+  document.addEventListener("langchange", (e) => renderMedicalPage(e.detail.lang));
+
+  const savedLang = localStorage.getItem("lang") || "zh";
+  if (savedLang !== "zh") {
+    renderMedicalPage(savedLang);
+  }
+</script>
