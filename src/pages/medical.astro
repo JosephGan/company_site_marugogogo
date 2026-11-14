@@ -12,7 +12,7 @@ const langs = [
 
 <Layout
   title="来日医疗服务"
-  description="丸五株式会社来日医疗服务，涵盖大病医疗 Second Opinion、再生医疗、高端医疗美容与精密体检。"
+  description="丸五株式会社来日医疗服务，涵盖大病医疗 Second Opinion、再生医疗、高端医疗美容与精密体检，以及阿部养庵堂 NMN 营养健康管理。"
 >
   <section class="partners-section medical-service-page">
     {langs.map((lang) => (
@@ -46,6 +46,11 @@ const langs = [
       var clinic = event.target.closest("[data-price-clinic]");
       if (clinic) {
         activate("data-price-clinic", "data-price-clinic-panel", clinic.dataset.priceClinic);
+        return;
+      }
+      var series = event.target.closest("[data-product-series]");
+      if (series) {
+        activate("data-product-series", "data-product-series-panel", series.dataset.productSeries);
       }
     });
 

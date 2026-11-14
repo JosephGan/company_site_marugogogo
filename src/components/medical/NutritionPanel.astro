@@ -1,0 +1,190 @@
+---
+// 营养健康 tab: Abe Yoando Pharma brand, XPRIZE Healthspan, technology and product lineup.
+// Content lives in src/content/nutrition.js.
+import Section from "./Section.astro";
+
+interface Props {
+  data: any;
+}
+
+const { data } = Astro.props;
+const { brand, xprize, tech, products, cta } = data;
+
+// Simple line icons for the clinical-result cards.
+const icons: Record<string, string> = {
+  motion: '<path d="M3 12h4l3-7 4 14 3-7h4"/>',
+  brain:
+    '<path d="M9.5 4A2.5 2.5 0 0 0 7 6.5v.2A3 3 0 0 0 5 12a3 3 0 0 0 2 5.3A2.7 2.7 0 0 0 9.7 20c1 0 1.8-.8 1.8-1.8V5.8A1.8 1.8 0 0 0 9.5 4z"/><path d="M14.5 4A2.5 2.5 0 0 1 17 6.5v.2A3 3 0 0 1 19 12a3 3 0 0 1-2 5.3 2.7 2.7 0 0 1-2.7 2.7c-1 0-1.8-.8-1.8-1.8V5.8A1.8 1.8 0 0 1 14.5 4z"/>',
+  shield: '<path d="M12 3l7 3v6c0 4.4-3 7.6-7 9-4-1.4-7-4.6-7-9V6z"/><path d="M9 12l2 2 4-4"/>',
+  dna: '<path d="M7 3c0 5 10 6 10 9s-10 4-10 9"/><path d="M17 3c0 5-10 6-10 9s10 4 10 9"/><path d="M8.5 7h7M8.5 17h7"/>',
+};
+---
+
+<!-- Brand -->
+<section class="medical-section nutri-brand">
+  <div class="nutri-brand-card">
+    <div class="nutri-brand-id">
+      <img src={brand.logo} alt={brand.name} width="320" height="123" loading="lazy" />
+      <p class="nutri-brand-name">{brand.name}</p>
+      <p class="nutri-brand-en">{brand.nameEn}</p>
+      <p class="nutri-brand-meta">{brand.meta}</p>
+    </div>
+    <div class="nutri-brand-text">
+      <p class="nutri-slogan">{brand.slogan}</p>
+      {brand.paragraphs.map((paragraph) => <p>{paragraph}</p>)}
+    </div>
+  </div>
+
+  <dl class="nutri-stats">
+    {brand.stats.map((stat) => (
+      <div>
+        <dt>{stat.value}</dt>
+        <dd>{stat.label}</dd>
+      </div>
+    ))}
+  </dl>
+</section>
+
+<!-- XPRIZE Healthspan -->
+<section class="medical-section nutri-xprize">
+  <div class="nutri-xprize-hero">
+    <p class="nutri-xprize-kicker">{xprize.kicker}</p>
+    <h3>{xprize.title}</h3>
+    <p class="nutri-xprize-intro">{xprize.intro}</p>
+    <ol class="nutri-milestones">
+      {xprize.milestones.map((step) => (
+        <li class:list={{ current: step.current }}>
+          <strong>{step.label}</strong>
+          <span>{step.sub}</span>
+        </li>
+      ))}
+    </ol>
+  </div>
+
+  <div class="nutri-results-block">
+    <h4>{xprize.resultsTitle}</h4>
+    <p class="nutri-results-intro">{xprize.resultsIntro}</p>
+    <div class="nutri-results">
+      {xprize.results.map((result) => (
+        <article class="nutri-result">
+          <svg viewBox="0 0 24 24" aria-hidden="true" set:html={icons[result.icon]} />
+          <h5>{result.title}</h5>
+          {result.figure && <p class="nutri-result-figure">{result.figure}</p>}
+          <ul>
+            {result.points.map((point) => <li>{point}</li>)}
+          </ul>
+        </article>
+      ))}
+    </div>
+    <p class="nutri-footnote">※ {xprize.resultsNote}</p>
+  </div>
+
+  <div class="nutri-xprize-info">
+    <div>
+      <h4>{xprize.aboutTitle}</h4>
+      <p>{xprize.about}</p>
+    </div>
+    <div>
+      <h4>{xprize.planTitle}</h4>
+      <p>{xprize.plan}</p>
+    </div>
+  </div>
+</section>
+
+<!-- Technology -->
+<Section title={tech.title} intro={tech.intro}>
+  <div class="nutri-tech">
+    {tech.items.map((item) => (
+      <div class="nutri-tech-item">
+        <span class="nutri-tech-mark">{item.mark}</span>
+        <h4>{item.title}</h4>
+        <p>{item.desc}</p>
+      </div>
+    ))}
+  </div>
+</Section>
+
+<!-- Products -->
+<Section title={products.title} intro={products.intro} class="nutri-products">
+  <div class="nutri-series-switch" role="tablist" aria-label={products.switchLabel}>
+    {products.series.map((series, index) => (
+      <button
+        type="button"
+        role="tab"
+        class:list={["nutri-series-btn", { active: index === 0 }]}
+        aria-selected={index === 0 ? "true" : "false"}
+        data-product-series={series.id}
+      >
+        <strong>{series.name}</strong>
+        <span>{series.nameEn}</span>
+      </button>
+    ))}
+  </div>
+
+  {products.series.map((series, index) => (
+    <div
+      class:list={["nutri-series", { active: index === 0 }]}
+      role="tabpanel"
+      data-product-series-panel={series.id}
+    >
+      <div class:list={["nutri-product-grid", { single: series.items.length === 1, "cols-2": [2, 4].includes(series.items.length) }]}>
+        {series.items.map((item) => (
+          <article class="nutri-product">
+            <div class="nutri-product-media">
+              <img src={item.image} alt={item.name} loading="lazy" />
+              {item.badges && (
+                <div class="nutri-badges">
+                  {item.badges.map((badge) => <span>{badge}</span>)}
+                </div>
+              )}
+            </div>
+            <div class="nutri-product-body">
+              <h5>{item.name}</h5>
+              <p class="nutri-product-tagline">{item.tagline}</p>
+              <dl class="nutri-product-spec">
+                {item.spec && (<div><dt>{products.labels.spec}</dt><dd>{item.spec}</dd></div>)}
+                {item.content && (<div><dt>{products.labels.content}</dt><dd>{item.content}</dd></div>)}
+                {item.ingredients && (<div><dt>{products.labels.ingredients}</dt><dd>{item.ingredients}</dd></div>)}
+                {item.usage && (<div><dt>{products.labels.usage}</dt><dd>{item.usage}</dd></div>)}
+              </dl>
+              {item.highlights && (
+                <ul class="nutri-highlights">
+                  {item.highlights.map((point) => <li>{point}</li>)}
+                </ul>
+              )}
+              <div class="nutri-product-price">
+                <p class="nutri-price-label">{products.priceLabel}</p>
+                {item.prices.length > 0 ? (
+                  <dl>
+                    {item.prices.map((line) => (
+                      <div>
+                        <dt>{line.label}</dt>
+                        <dd>{line.price}</dd>
+                      </div>
+                    ))}
+                  </dl>
+                ) : (
+                  <p class="nutri-price-note">{item.priceNote}</p>
+                )}
+              </div>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  ))}
+
+  <div class="nutri-product-notes">
+    <p>{products.currencyNote}</p>
+    <p>{products.note}</p>
+  </div>
+</Section>
+
+<!-- Call to action -->
+<section class="medical-section nutri-cta">
+  <div>
+    <h3>{cta.title}</h3>
+    <p>{cta.text}</p>
+  </div>
+  <a class="btn primary" href="/contact">{cta.button}</a>
+</section>
