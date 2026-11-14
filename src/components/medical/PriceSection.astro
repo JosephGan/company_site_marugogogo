@@ -1,0 +1,150 @@
+---
+// Partner-clinic reference prices for the regenerative-medicine tab.
+// Data lives in src/content/prices.js; see the comment there for section types.
+interface Props {
+  data: any;
+}
+
+const { data } = Astro.props;
+---
+
+<section class="medical-section medical-pricing">
+  <div class="medical-section-heading">
+    <h3>{data.title}</h3>
+    <p>{data.intro}</p>
+  </div>
+
+  <div class="price-switch" role="tablist" aria-label={data.switchLabel}>
+    {data.clinics.map((clinic, index) => (
+      <button
+        type="button"
+        role="tab"
+        class:list={["price-switch-btn", { active: index === 0 }]}
+        aria-selected={index === 0 ? "true" : "false"}
+        data-price-clinic={clinic.id}
+      >
+        <strong>{clinic.name}</strong>
+        <span>{clinic.nameEn}</span>
+      </button>
+    ))}
+  </div>
+
+  {data.clinics.map((clinic, index) => (
+    <div class:list={["price-clinic", { active: index === 0 }]} role="tabpanel" data-price-clinic-panel={clinic.id}>
+      <div class="price-clinic-head">
+        <div>
+          <h4>{clinic.name}</h4>
+          <p class="price-clinic-en">{clinic.nameEn} · {clinic.location}</p>
+        </div>
+        <p class="price-clinic-currency">{clinic.currencyNote}</p>
+      </div>
+
+      <div class="price-blocks">
+        {clinic.sections.map((section, sectionIndex) => (
+          <details class="price-block" open={sectionIndex === 0}>
+            <summary>
+              <span class="price-block-title">
+                {section.title}
+                {section.titleEn && <small>{section.titleEn}</small>}
+              </span>
+            </summary>
+
+            <div class="price-block-body">
+              {section.type === "table" && (
+                <>
+                  {section.unit && <p class="price-unit">{section.unit}</p>}
+                  <div class="price-table-wrap">
+                    <table class="price-table">
+                      <thead>
+                        <tr>
+                          {section.columns.map((column) => <th scope="col">{column}</th>)}
+                        </tr>
+                      </thead>
+                      {section.groups.map((group) => (
+                        <tbody>
+                          <tr class="price-group-row">
+                            <th colspan={section.columns.length - 1} scope="rowgroup">
+                              {group.label.pre && <small>{group.label.pre}</small>}
+                              {group.label.lines.map((line) => <span>{line}</span>)}
+                            </th>
+                          </tr>
+                          {group.rows.map((row, rowIndex) => (
+                            <tr>
+                              {rowIndex === 0 && (
+                                <th class="price-group-label" rowspan={group.rows.length} scope="rowgroup">
+                                  {group.label.pre && <small>{group.label.pre}</small>}
+                                  {group.label.lines.map((line) => <span>{line}</span>)}
+                                </th>
+                              )}
+                              {row.map((cell) => <td>{cell}</td>)}
+                            </tr>
+                          ))}
+                        </tbody>
+                      ))}
+                    </table>
+                  </div>
+                </>
+              )}
+
+              {section.type === "menu" && (
+                <>
+                  {section.intro && <p class="price-section-intro">{section.intro}</p>}
+                  <ul class="price-menu">
+                    {section.items.map((item) => (
+                      <li class="price-menu-item">
+                        <div class="price-menu-main">
+                          <h5>{item.name}</h5>
+                          <p class="price-menu-en">{item.nameEn}</p>
+                          {item.subtitle && <p class="price-menu-sub">{item.subtitle}</p>}
+                          {item.tags && (
+                            <div class="price-tags">
+                              {item.tags.map((tag) => <span>{tag}</span>)}
+                            </div>
+                          )}
+                          <p class="price-menu-desc">{item.desc}</p>
+                        </div>
+                        <dl class="price-menu-prices">
+                          {item.prices.map((line) => (
+                            <div>
+                              <dt>{line.label}</dt>
+                              <dd>{line.price}</dd>
+                            </div>
+                          ))}
+                        </dl>
+                      </li>
+                    ))}
+                  </ul>
+                </>
+              )}
+
+              {section.type === "list" && (
+                <>
+                  {section.intro && <p class="price-section-intro">{section.intro}</p>}
+                  <ul class="price-plan-list">
+                    {section.items.map((item) => <li>{item}</li>)}
+                  </ul>
+                </>
+              )}
+
+              {section.notes && section.notes.length > 0 && (
+                <ul class="price-notes">
+                  {section.notes.map((note) => <li>{note}</li>)}
+                </ul>
+              )}
+            </div>
+          </details>
+        ))}
+      </div>
+
+      {clinic.notes.length > 0 && (
+        <ul class="price-notes price-clinic-notes">
+          {clinic.notes.map((note) => <li>{note}</li>)}
+        </ul>
+      )}
+    </div>
+  ))}
+
+  <div class="price-notice">
+    {data.notice.map((line) => <p>{line}</p>)}
+  </div>
+</section>

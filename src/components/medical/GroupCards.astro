@@ -1,0 +1,36 @@
+---
+interface Group {
+  title: string;
+  intro?: string;
+  chips?: string[];
+  desc?: string;
+  items?: string[];
+}
+
+interface Props {
+  groups: Group[];
+  cols?: 1 | 2 | 3;
+}
+
+const { groups, cols = 2 } = Astro.props;
+---
+
+<div class={`medical-group-grid cols-${cols}`}>
+  {groups.map((group) => (
+    <div class="medical-group-card">
+      <h4>{group.title}</h4>
+      {group.intro && <p>{group.intro}</p>}
+      {group.chips && group.chips.length > 0 && (
+        <div class="medical-chip-grid">
+          {group.chips.map((item) => <span>{item}</span>)}
+        </div>
+      )}
+      {group.desc && <p>{group.desc}</p>}
+      {group.items && group.items.length > 0 && (
+        <ul>
+          {group.items.map((item) => <li>{item}</li>)}
+        </ul>
+      )}
+    </div>
+  ))}
+</div>
