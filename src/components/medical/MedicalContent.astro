@@ -110,6 +110,7 @@ const tabs = [
 
     <Section title={regenerative.networkTitle} intro={regenerative.networkIntro}>
       <GroupCards
+        cols={regenerative.partnerRegions.length > 1 ? 2 : 1}
         groups={regenerative.partnerRegions.map((region) => ({
           title: region.region,
           chips: region.institutions,
