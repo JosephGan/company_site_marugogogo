@@ -1,0 +1,180 @@
+---
+// Full content of the /medical page for one language.
+// medical.astro renders this once per language; CSS shows the pane matching <html lang>.
+import { text } from "../../content/text.js";
+import { pricing } from "../../content/prices.js";
+import Section from "./Section.astro";
+import Timeline from "./Timeline.astro";
+import GroupCards from "./GroupCards.astro";
+import PartnerCards from "./PartnerCards.astro";
+import PriceSection from "./PriceSection.astro";
+
+interface Props {
+  lang: "zh" | "ja";
+}
+
+const { lang } = Astro.props;
+const t = text[lang];
+const page = t.medicalPage;
+const labels = page.partnerSections;
+const medical = t.partners.medicalService;
+const regenerative = t.partners.regenerativeService;
+const aesthetic = t.partners.aestheticService;
+const partnersIn = (categories: string[]) => t.partners.items.filter((item) => categories.includes(item.category));
+
+const tabs = [
+  { id: "critical", label: page.tabs.critical },
+  { id: "regenerative", label: page.tabs.regenerative },
+  { id: "aesthetic", label: page.tabs.aesthetic },
+];
+---
+
+<div class="medical-service-hero">
+  <p class="medical-service-eyebrow">{page.eyebrow}</p>
+  <h1>{page.title}</h1>
+  <p class="page-intro">{page.intro}</p>
+</div>
+
+<div class="medical-tab-shell">
+  <div class="medical-tab-list" role="tablist" aria-label={page.title}>
+    {tabs.map((tab, index) => (
+      <button
+        type="button"
+        role="tab"
+        class:list={["medical-tab", { active: index === 0 }]}
+        aria-selected={index === 0 ? "true" : "false"}
+        data-medical-tab={tab.id}
+      >
+        {tab.label}
+      </button>
+    ))}
+  </div>
+
+  <!-- 大病医疗 / Critical care -->
+  <section class="medical-tab-panel active" role="tabpanel" data-medical-panel="critical">
+    <div class="medical-panel-header">
+      <p class="medical-panel-eyebrow">{medical.titleEn}</p>
+      <h2>{medical.title}</h2>
+    </div>
+
+    <Section title={medical.processTitle} intro={medical.processIntro}>
+      <Timeline steps={medical.processSteps} />
+    </Section>
+
+    <Section title={medical.specialtiesTitle}>
+      <div class="medical-chip-grid">
+        {medical.specialties.map((item) => <span>{item}</span>)}
+      </div>
+    </Section>
+
+    <Section title={medical.advantagesTitle} intro={medical.advantagesIntro}>
+      <div class="medical-advantage-grid">
+        {medical.advantages.map((item) => <span>{item}</span>)}
+      </div>
+    </Section>
+
+    <Section title={medical.hospitalsTitle}>
+      <GroupCards
+        groups={[
+          { title: medical.universityHospitalsTitle, items: medical.universityHospitals },
+          { title: medical.cancerHospitalsTitle, items: medical.cancerHospitals },
+        ]}
+      />
+    </Section>
+
+    <PartnerCards title={labels.criticalTitle} intro={labels.criticalIntro} items={partnersIn(["checkup"])} />
+  </section>
+
+  <!-- 再生医疗 / Regenerative medicine -->
+  <section class="medical-tab-panel" role="tabpanel" data-medical-panel="regenerative">
+    <div class="medical-panel-header">
+      <p class="medical-panel-eyebrow">{regenerative.titleEn}</p>
+      <h2>{regenerative.title}</h2>
+    </div>
+
+    <Section title={regenerative.introTitle} intro={regenerative.intro} prose />
+
+    <Section title={regenerative.audienceTitle} intro={regenerative.audienceIntro}>
+      <div class="medical-chip-grid">
+        {regenerative.audience.map((item) => <span>{item}</span>)}
+      </div>
+    </Section>
+
+    <Section title={regenerative.projectsTitle} intro={regenerative.projectsIntro}>
+      <GroupCards groups={regenerative.projectGroups} />
+    </Section>
+
+    <Section title={regenerative.flowTitle}>
+      <Timeline steps={regenerative.flow} />
+    </Section>
+
+    <Section title={regenerative.networkTitle} intro={regenerative.networkIntro}>
+      <GroupCards
+        cols={regenerative.partnerRegions.length > 1 ? 2 : 1}
+        groups={regenerative.partnerRegions.map((region) => ({
+          title: region.region,
+          chips: region.institutions,
+          desc: region.desc,
+        }))}
+      />
+    </Section>
+
+    <Section title={regenerative.coverageTitle} intro={regenerative.coverageIntro}>
+      <GroupCards groups={regenerative.coverageGroups} cols={3} />
+    </Section>
+
+    <PriceSection data={pricing[lang]} />
+
+    <Section title={regenerative.advantagesTitle} intro={regenerative.advantagesIntro}>
+      <div class="medical-advantage-grid">
+        {regenerative.advantages.map((item) => <span>{item}</span>)}
+      </div>
+      <p class="medical-section-note">{regenerative.closing}</p>
+    </Section>
+
+    <PartnerCards title={labels.regenerativeTitle} intro={labels.regenerativeIntro} items={partnersIn(["regenerative"])} />
+  </section>
+
+  <!-- 医美与体检 / Aesthetic medicine & screening -->
+  <section class="medical-tab-panel" role="tabpanel" data-medical-panel="aesthetic">
+    <div class="medical-panel-header">
+      <p class="medical-panel-eyebrow">{aesthetic.titleEn}</p>
+      <h2>{aesthetic.title}</h2>
+    </div>
+
+    <Section title={aesthetic.beautyTitle} intro={aesthetic.beautyIntro} prose />
+
+    <Section title={aesthetic.serviceFlowTitle}>
+      <Timeline steps={aesthetic.serviceFlow} />
+    </Section>
+
+    <Section title={aesthetic.partnerTitle}>
+      <GroupCards
+        cols={1}
+        groups={[{ title: aesthetic.partnerRegion, chips: aesthetic.partnerInstitutions, desc: aesthetic.partnerDesc }]}
+      />
+    </Section>
+
+    <Section title={aesthetic.beautyProjectsTitle} intro={aesthetic.beautyProjectsIntro}>
+      <GroupCards groups={aesthetic.beautyProjects} />
+    </Section>
+
+    <Section title={aesthetic.screeningTitle} intro={aesthetic.screeningIntro} prose />
+
+    <Section title={aesthetic.screeningProjectsTitle} intro={aesthetic.screeningProjectsIntro}>
+      <div class="medical-chip-grid">
+        {aesthetic.screeningProjects.map((item) => <span>{item}</span>)}
+      </div>
+      <p class="medical-section-note">{aesthetic.screeningNote}</p>
+    </Section>
+
+    <Section title={aesthetic.coordinationTitle} intro={aesthetic.coordinationIntro}>
+      <div class="medical-advantage-grid">
+        {aesthetic.coordinationItems.map((item) => <span>{item}</span>)}
+      </div>
+      <p class="medical-section-note">{aesthetic.closing}</p>
+    </Section>
+
+    <PartnerCards title={labels.aestheticTitle} intro={labels.aestheticIntro} items={partnersIn(["beauty", "nutrition"])} />
+  </section>
+</div>

@@ -1,0 +1,55 @@
+---
+interface Branch {
+  title: string;
+  tag: string;
+  steps: string[];
+}
+
+interface Step {
+  number: string;
+  title: string;
+  titleEn?: string;
+  desc: string;
+  services?: string[];
+  branches?: Branch[];
+}
+
+interface Props {
+  steps: Step[];
+}
+
+const { steps } = Astro.props;
+---
+
+<ol class="medical-timeline">
+  {steps.map((step) => (
+    <li class="medical-step">
+      <div class="medical-step-number">{step.number}</div>
+      <div class="medical-step-body">
+        {step.titleEn && <p class="medical-step-en">{step.titleEn}</p>}
+        <h4>{step.title}</h4>
+        <p>{step.desc}</p>
+        {step.branches && step.branches.length > 0 && (
+          <div class="medical-step-branches">
+            {step.branches.map((branch) => (
+              <div class="medical-branch">
+                <div class="medical-branch-head">
+                  <h5>{branch.title}</h5>
+                  <span class="medical-branch-tag">{branch.tag}</span>
+                </div>
+                <ol>
+                  {branch.steps.map((item) => <li>{item}</li>)}
+                </ol>
+              </div>
+            ))}
+          </div>
+        )}
+        {step.services && step.services.length > 0 && (
+          <ul class="medical-step-services">
+            {step.services.map((item) => <li>{item}</li>)}
+          </ul>
+        )}
+      </div>
+    </li>
+  ))}
+</ol>

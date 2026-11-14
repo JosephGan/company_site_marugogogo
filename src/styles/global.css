@@ -558,6 +558,32 @@ main {
   line-height: 1.9;
 }
 
+/* -------- Medical service page -------- */
+/* Both languages are rendered; show the pane that matches <html lang>. */
+html[lang="ja"] [data-lang-pane="zh"],
+html:not([lang="ja"]) [data-lang-pane="ja"] {
+  display: none;
+}
+
+/* Each service tab keeps its own accent colour, applied through the same rules. */
+[data-medical-tab="critical"],
+[data-medical-panel="critical"] {
+  --accent: #5f8467;
+  --accent-rgb: 95, 132, 103;
+}
+
+[data-medical-tab="regenerative"],
+[data-medical-panel="regenerative"] {
+  --accent: #597f8f;
+  --accent-rgb: 89, 127, 143;
+}
+
+[data-medical-tab="aesthetic"],
+[data-medical-panel="aesthetic"] {
+  --accent: #8c6f82;
+  --accent-rgb: 140, 111, 130;
+}
+
 .medical-service-page {
   max-width: 1080px;
   margin: 0 auto;
@@ -589,7 +615,7 @@ main {
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 0.5rem;
   max-width: 760px;
-  margin: 0 auto 2.4rem;
+  margin: 0 auto 3rem;
   padding: 0.45rem;
   background: rgba(250, 248, 245, 0.92);
   border: 1px solid rgba(180, 170, 160, 0.24);
@@ -619,8 +645,8 @@ main {
 
 .medical-tab.active {
   background: #ffffff;
-  border-color: rgba(107, 143, 113, 0.34);
-  color: #5f8467;
+  border-color: rgba(var(--accent-rgb), 0.4);
+  color: var(--accent);
   box-shadow: 0 4px 16px rgba(180, 170, 160, 0.14);
 }
 
@@ -633,39 +659,58 @@ main {
   animation: fadeUp 0.35s ease both;
 }
 
-.medical-service-block {
-  margin-bottom: 4rem;
+/* Panel header: English eyebrow + title, identical on every tab */
+.medical-panel-header {
+  text-align: center;
+  margin: 0 auto 3.2rem;
 }
 
-.professional-service-block .medical-step-en {
-  color: #5f8467;
+.medical-panel-eyebrow {
+  color: var(--accent);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
 }
 
-.regenerative-service-block .medical-step-en {
-  color: #597f8f;
+.medical-panel-header h2 {
+  font-family: "Noto Serif SC", "Noto Serif JP", serif;
+  font-size: clamp(1.4rem, 3vw, 1.95rem);
+  font-weight: 700;
+  color: #2d2a26;
+  letter-spacing: 0.05em;
+  line-height: 1.5;
 }
 
-.aesthetic-service-block .medical-step-en {
-  color: #8c6f82;
+.medical-panel-header h2::after {
+  content: "";
+  display: block;
+  width: 36px;
+  height: 2px;
+  margin: 1rem auto 0;
+  background: var(--accent);
+  opacity: 0.7;
+}
+
+/* Sections */
+.medical-section {
+  margin-bottom: 3.75rem;
 }
 
 .medical-section-heading {
   max-width: 720px;
-  margin: 0 auto 2rem;
+  margin: 0 auto 1.8rem;
   text-align: center;
 }
 
-.medical-section-heading.compact {
-  margin-bottom: 1.4rem;
-}
-
-.medical-section-heading h2 {
+.medical-section-heading h3 {
   font-family: "Noto Serif SC", "Noto Serif JP", serif;
-  font-size: clamp(1.2rem, 2.5vw, 1.7rem);
+  font-size: clamp(1.15rem, 2.2vw, 1.45rem);
   font-weight: 700;
   color: #2d2a26;
   letter-spacing: 0.04em;
-  margin-bottom: 0.75rem;
+  margin-bottom: 0.7rem;
 }
 
 .medical-section-heading p {
@@ -674,10 +719,34 @@ main {
   line-height: 1.9;
 }
 
+.medical-section-heading p + p {
+  margin-top: 0.75rem;
+}
+
+.medical-section-heading.is-prose {
+  max-width: 760px;
+  margin-bottom: 0;
+}
+
+.medical-section-heading.is-prose p {
+  text-align: left;
+}
+
+.medical-section-note {
+  max-width: 720px;
+  margin: 1.4rem auto 0;
+  text-align: center;
+  color: #6b6560;
+  font-size: 0.9rem;
+  line-height: 1.85;
+}
+
+/* Timeline — the shared service-flow component */
 .medical-timeline {
   position: relative;
   display: grid;
   gap: 1.25rem;
+  list-style: none;
 }
 
 .medical-timeline::before {
@@ -687,7 +756,7 @@ main {
   top: 1.5rem;
   bottom: 1.5rem;
   width: 1px;
-  background: rgba(107, 143, 113, 0.2);
+  background: rgba(var(--accent-rgb), 0.22);
 }
 
 .medical-step {
@@ -704,9 +773,9 @@ main {
   width: 4rem;
   height: 4rem;
   border-radius: 50%;
-  border: 1px solid rgba(107, 143, 113, 0.35);
+  border: 1px solid rgba(var(--accent-rgb), 0.4);
   background: #faf8f5;
-  color: #6b8f71;
+  color: var(--accent);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -719,13 +788,14 @@ main {
 .medical-step-body {
   background: #ffffff;
   border: 1px solid rgba(180, 170, 160, 0.24);
+  border-left: 3px solid rgba(var(--accent-rgb), 0.42);
   border-radius: 8px;
   padding: 1.5rem;
   box-shadow: 0 4px 18px rgba(180, 170, 160, 0.1);
 }
 
 .medical-step-en {
-  color: #9a948c;
+  color: var(--accent);
   font-size: 0.78rem;
   font-weight: 600;
   letter-spacing: 0.08em;
@@ -733,7 +803,7 @@ main {
   margin-bottom: 0.35rem;
 }
 
-.medical-step-body h3 {
+.medical-step-body h4 {
   font-family: "Noto Serif SC", "Noto Serif JP", serif;
   font-size: 1.12rem;
   color: #2d2a26;
@@ -741,34 +811,33 @@ main {
   margin-bottom: 0.6rem;
 }
 
-.medical-step-body p {
+.medical-step-body > p:not(.medical-step-en) {
   color: #6b6560;
   font-size: 0.92rem;
   line-height: 1.85;
   margin-bottom: 0.9rem;
 }
 
-.medical-step-body ul {
+.medical-step-body > p:last-child {
+  margin-bottom: 0;
+}
+
+.medical-step-services {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 0.45rem 1rem;
   list-style: none;
 }
 
-.medical-step-body li,
-.medical-advantage-grid span,
-.medical-chip-grid span {
+.medical-step-services li {
   position: relative;
   color: #5d5751;
   font-size: 0.88rem;
   line-height: 1.6;
-}
-
-.medical-step-body li {
   padding-left: 1rem;
 }
 
-.medical-step-body li::before {
+.medical-step-services li::before {
   content: "";
   position: absolute;
   left: 0;
@@ -776,64 +845,87 @@ main {
   width: 5px;
   height: 5px;
   border-radius: 50%;
-  background: rgba(107, 143, 113, 0.7);
+  background: rgba(var(--accent-rgb), 0.7);
 }
 
-.medical-flow {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.7rem;
-  justify-content: center;
-  list-style: none;
-  counter-reset: medical-flow;
+/* Branching step (e.g. cultured vs non-cultured treatment routes) */
+.medical-step-branches {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.9rem;
 }
 
-.medical-flow-diagram {
-  position: relative;
-  align-items: stretch;
-  margin: 0 auto 2.2rem;
+.medical-step-branches + .medical-step-services {
+  margin-top: 0.9rem;
 }
 
-.medical-flow li {
-  counter-increment: medical-flow;
-  position: relative;
-  background: #ffffff;
-  border: 1px solid rgba(180, 170, 160, 0.28);
-  border-radius: 6px;
-  padding: 0.65rem 0.85rem 0.65rem 2.1rem;
-  color: #5d5751;
-  font-size: 0.84rem;
-  line-height: 1.5;
+.medical-branch {
+  background: rgba(var(--accent-rgb), 0.05);
+  border: 1px solid rgba(var(--accent-rgb), 0.18);
+  border-radius: 8px;
+  padding: 1rem 1.1rem;
 }
 
-.medical-flow-diagram li {
-  flex: 1 1 190px;
-  min-height: 4.2rem;
+.medical-branch-head {
   display: flex;
   align-items: center;
-  box-shadow: 0 4px 16px rgba(180, 170, 160, 0.12);
+  justify-content: space-between;
+  gap: 0.6rem;
+  margin-bottom: 0.75rem;
 }
 
-.medical-flow li::before {
-  content: counter(medical-flow, decimal-leading-zero);
+.medical-branch-head h5 {
+  font-family: "Noto Serif SC", "Noto Serif JP", serif;
+  font-size: 0.98rem;
+  color: #2d2a26;
+  letter-spacing: 0.03em;
+}
+
+.medical-branch-tag {
+  flex-shrink: 0;
+  background: #ffffff;
+  border: 1px solid rgba(var(--accent-rgb), 0.35);
+  border-radius: 999px;
+  color: var(--accent);
+  font-size: 0.74rem;
+  font-weight: 600;
+  padding: 0.1rem 0.65rem;
+}
+
+.medical-branch ol {
+  list-style: none;
+  counter-reset: branch;
+  display: grid;
+  gap: 0.55rem;
+}
+
+.medical-branch li {
+  counter-increment: branch;
+  position: relative;
+  color: #5d5751;
+  font-size: 0.86rem;
+  line-height: 1.6;
+  padding-left: 1.75rem;
+}
+
+.medical-branch li::before {
+  content: counter(branch);
   position: absolute;
-  left: 0.75rem;
-  top: 0.68rem;
-  color: #6b8f71;
-  font-size: 0.72rem;
+  left: 0;
+  top: 0.15em;
+  width: 1.25rem;
+  height: 1.25rem;
+  border-radius: 50%;
+  background: var(--accent);
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.7rem;
   font-weight: 700;
 }
 
-.medical-flow-diagram li:not(:last-child)::after {
-  content: "";
-  position: absolute;
-  right: -0.55rem;
-  top: 50%;
-  width: 0.7rem;
-  height: 1px;
-  background: rgba(107, 143, 113, 0.32);
-}
-
+/* Chips & advantage tiles */
 .medical-chip-grid,
 .medical-advantage-grid {
   display: grid;
@@ -844,49 +936,93 @@ main {
 .medical-chip-grid span,
 .medical-advantage-grid span {
   display: block;
-  background: rgba(255, 255, 255, 0.72);
+  position: relative;
   border: 1px solid rgba(180, 170, 160, 0.24);
   border-radius: 6px;
   padding: 0.75rem 0.95rem;
+  font-size: 0.88rem;
+  line-height: 1.6;
 }
 
 .medical-chip-grid span {
-  color: #6b8f71;
+  background: rgba(255, 255, 255, 0.72);
+  color: var(--accent);
   font-weight: 500;
 }
 
 .medical-advantage-grid span {
   background: #ffffff;
+  color: #5d5751;
+  padding-left: 1.9rem;
 }
 
-.medical-hospital-groups {
+.medical-advantage-grid span::before {
+  content: "";
+  position: absolute;
+  left: 0.95rem;
+  top: 50%;
+  width: 6px;
+  height: 6px;
+  margin-top: -3px;
+  border-radius: 50%;
+  background: var(--accent);
+  opacity: 0.75;
+}
+
+/* Grouped cards (hospitals, projects, regions, coverage) */
+.medical-group-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 1.25rem;
 }
 
-.medical-hospital-group {
+.medical-group-grid.cols-1 {
+  grid-template-columns: 1fr;
+}
+
+.medical-group-grid.cols-3 {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.medical-group-card {
   background: #ffffff;
   border: 1px solid rgba(180, 170, 160, 0.24);
+  border-top: 2px solid rgba(var(--accent-rgb), 0.55);
   border-radius: 8px;
   padding: 1.5rem;
 }
 
-.medical-hospital-group h3 {
+.medical-group-card h4 {
   font-family: "Noto Serif SC", "Noto Serif JP", serif;
   color: #2d2a26;
-  font-size: 1rem;
+  font-size: 1.02rem;
   letter-spacing: 0.04em;
-  margin-bottom: 1rem;
+  margin-bottom: 0.8rem;
 }
 
-.medical-hospital-group ul {
+.medical-group-card > p {
+  color: #6b6560;
+  font-size: 0.88rem;
+  line-height: 1.8;
+  margin-bottom: 0.9rem;
+}
+
+.medical-group-card > :last-child {
+  margin-bottom: 0;
+}
+
+.medical-group-card .medical-chip-grid {
+  grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+  margin-bottom: 0.9rem;
+}
+
+.medical-group-card ul {
   list-style: none;
   display: grid;
   gap: 0.65rem;
 }
 
-.medical-hospital-group li {
+.medical-group-card li {
   color: #6b6560;
   font-size: 0.9rem;
   line-height: 1.55;
@@ -894,176 +1030,432 @@ main {
   border-bottom: 1px solid rgba(180, 170, 160, 0.18);
 }
 
-.medical-hospital-group li:last-child {
+.medical-group-card li:last-child {
   padding-bottom: 0;
   border-bottom: none;
 }
 
-.aesthetic-service-block {
-  padding-top: 0.5rem;
+.medical-tab-panel .partner-card .partner-location {
+  color: var(--accent);
 }
 
-.professional-service-block .medical-step-body {
-  border-left: 3px solid rgba(95, 132, 103, 0.42);
+/* -------- Reference prices (regenerative tab) -------- */
+.price-switch {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.6rem;
+  margin: 0 auto 1.6rem;
 }
 
-.regenerative-service-block {
-  padding-top: 0.5rem;
+.price-switch-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  min-width: 220px;
+  padding: 0.7rem 1.2rem;
+  background: rgba(255, 255, 255, 0.7);
+  border: 1px solid rgba(180, 170, 160, 0.32);
+  border-radius: 8px;
+  color: #6b6560;
+  cursor: pointer;
+  font: inherit;
+  text-align: left;
+  transition: background 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
-.regenerative-service-block .medical-feature-kicker,
-.regenerative-service-block .aesthetic-flow-card > p,
-.regenerative-service-block .medical-chip-grid span {
-  color: #597f8f;
+.price-switch-btn strong {
+  color: #2d2a26;
+  font-size: 0.94rem;
+  font-weight: 600;
+  line-height: 1.5;
 }
 
-.regenerative-service-block .medical-feature-section,
-.regenerative-service-block .aesthetic-flow-card,
-.regenerative-service-block .medical-hospital-group {
-  border-left: 3px solid rgba(89, 128, 150, 0.32);
+.price-switch-btn span {
+  color: #9a948c;
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
 }
 
-.aesthetic-service-block .medical-feature-kicker,
-.aesthetic-service-block .aesthetic-flow-card > p,
-.aesthetic-service-block .medical-chip-grid span {
-  color: #8c6f82;
+.price-switch-btn:hover {
+  background: #ffffff;
 }
 
-.aesthetic-service-block .medical-feature-section,
-.aesthetic-service-block .aesthetic-flow-card,
-.aesthetic-service-block .medical-hospital-group {
-  border-left: 3px solid rgba(140, 111, 130, 0.28);
+.price-switch-btn.active {
+  background: #ffffff;
+  border-color: var(--accent);
+  box-shadow: inset 0 0 0 1px var(--accent), 0 4px 16px rgba(180, 170, 160, 0.14);
 }
 
-.aesthetic-section-stack {
+.price-switch-btn.active strong {
+  color: var(--accent);
+}
+
+.price-clinic {
+  display: none;
+}
+
+.price-clinic.active {
+  display: block;
+  animation: fadeUp 0.3s ease both;
+}
+
+.price-clinic-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 0.6rem 1.5rem;
+  padding-bottom: 0.9rem;
+  margin-bottom: 1rem;
+  border-bottom: 1px solid rgba(180, 170, 160, 0.3);
+}
+
+.price-clinic-head h4 {
+  font-family: "Noto Serif SC", "Noto Serif JP", serif;
+  color: #2d2a26;
+  font-size: 1.15rem;
+  letter-spacing: 0.04em;
+}
+
+.price-clinic-en {
+  color: #9a948c;
+  font-size: 0.78rem;
+  letter-spacing: 0.06em;
+}
+
+.price-clinic-currency {
+  max-width: 440px;
+  color: #6b6560;
+  font-size: 0.82rem;
+  line-height: 1.7;
+}
+
+.price-blocks {
   display: grid;
+  gap: 0.75rem;
+}
+
+.price-block {
+  background: #ffffff;
+  border: 1px solid rgba(180, 170, 160, 0.26);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.price-block summary {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem 1.25rem;
+  cursor: pointer;
+  list-style: none;
+}
+
+.price-block summary::-webkit-details-marker {
+  display: none;
+}
+
+.price-block summary::after {
+  content: "";
+  flex-shrink: 0;
+  width: 0.55rem;
+  height: 0.55rem;
+  margin-top: -0.25rem;
+  border-right: 1.5px solid var(--accent);
+  border-bottom: 1.5px solid var(--accent);
+  transform: rotate(45deg);
+  transition: transform 0.2s ease;
+}
+
+.price-block[open] summary {
+  background: rgba(var(--accent-rgb), 0.05);
+  border-bottom: 1px solid rgba(180, 170, 160, 0.2);
+}
+
+.price-block[open] summary::after {
+  margin-top: 0.25rem;
+  transform: rotate(-135deg);
+}
+
+.price-block-title {
+  flex: 1;
+  font-family: "Noto Serif SC", "Noto Serif JP", serif;
+  color: #2d2a26;
+  font-size: 0.98rem;
+  font-weight: 700;
+  line-height: 1.5;
+  letter-spacing: 0.02em;
+}
+
+.price-block-title small {
+  display: block;
+  margin-top: 0.1rem;
+  font-family: "Noto Sans JP", sans-serif;
+  color: #9a948c;
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+}
+
+.price-block-body {
+  padding: 1rem 1.25rem 1.25rem;
+}
+
+.price-unit {
+  color: #9a948c;
+  font-size: 0.78rem;
+  text-align: right;
+  margin-bottom: 0.4rem;
+}
+
+.price-section-intro {
+  color: #6b6560;
+  font-size: 0.86rem;
+  margin-bottom: 0.6rem;
+}
+
+.price-table-wrap {
+  overflow-x: auto;
+}
+
+.price-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.88rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.price-table th,
+.price-table td {
+  padding: 0.6rem 0.75rem;
+  border-bottom: 1px solid rgba(180, 170, 160, 0.2);
+}
+
+.price-table thead th {
+  background: #faf8f5;
+  border-bottom: 1px solid rgba(180, 170, 160, 0.45);
+  color: #7a746d;
+  font-size: 0.78rem;
+  font-weight: 600;
+  text-align: right;
+  white-space: nowrap;
+}
+
+.price-table thead th:first-child {
+  text-align: left;
+}
+
+.price-table td {
+  color: #5d5751;
+  text-align: right;
+}
+
+.price-table td:last-child {
+  color: #2d2a26;
+  font-weight: 700;
+}
+
+.price-table tbody tr:last-child > * {
+  border-bottom-color: rgba(180, 170, 160, 0.4);
+}
+
+.price-group-label {
+  border-right: 1px dashed rgba(180, 170, 160, 0.4);
+  color: #2d2a26;
+  font-weight: 600;
+  text-align: left;
+  vertical-align: middle;
+}
+
+.price-group-label span,
+.price-group-row span {
+  display: block;
+  line-height: 1.55;
+}
+
+.price-group-label small,
+.price-group-row small {
+  display: block;
+  color: #9a948c;
+  font-size: 0.72rem;
+  font-weight: 500;
+}
+
+.price-group-row {
+  display: none;
+}
+
+.price-group-row th {
+  background: rgba(var(--accent-rgb), 0.06);
+  color: #2d2a26;
+  font-size: 0.84rem;
+  font-weight: 600;
+  text-align: left;
+}
+
+.price-menu {
+  list-style: none;
+  display: grid;
+}
+
+.price-menu-item {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 0.6rem 2.5rem;
+  padding: 1.1rem 0;
+  border-bottom: 1px solid rgba(180, 170, 160, 0.2);
+}
+
+.price-menu-item:first-child {
+  padding-top: 0.25rem;
+}
+
+.price-menu-item:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.price-menu-main h5 {
+  font-family: "Noto Serif SC", "Noto Serif JP", serif;
+  color: #2d2a26;
+  font-size: 0.98rem;
+  letter-spacing: 0.02em;
+}
+
+.price-menu-en {
+  color: #9a948c;
+  font-size: 0.74rem;
+  letter-spacing: 0.04em;
+}
+
+.price-menu-sub {
+  color: var(--accent);
+  font-size: 0.8rem;
+  margin-top: 0.15rem;
+}
+
+.price-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  margin-top: 0.5rem;
+}
+
+.price-tags span {
+  background: rgba(var(--accent-rgb), 0.08);
+  border-radius: 4px;
+  color: var(--accent);
+  font-size: 0.74rem;
+  padding: 0.12rem 0.55rem;
+}
+
+.price-menu-desc {
+  color: #6b6560;
+  font-size: 0.84rem;
+  line-height: 1.75;
+  margin-top: 0.45rem;
+}
+
+.price-menu-prices {
+  display: grid;
+  align-content: start;
+  gap: 0.3rem;
+  min-width: 240px;
+}
+
+.price-menu-prices div {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
   gap: 1.2rem;
 }
 
-.medical-feature-section {
-  background: rgba(255, 255, 255, 0.72);
-  border: 1px solid rgba(180, 170, 160, 0.24);
-  border-radius: 8px;
-  padding: clamp(1.25rem, 3vw, 1.8rem);
+.price-menu-prices dt {
+  color: #7a746d;
+  font-size: 0.78rem;
+  white-space: nowrap;
 }
 
-.medical-feature-section h3 {
-  font-family: "Noto Serif SC", "Noto Serif JP", serif;
-  color: #2d2a26;
-  font-size: 1.08rem;
-  letter-spacing: 0.04em;
-  margin-bottom: 0.8rem;
-}
-
-.medical-feature-section p {
-  color: #6b6560;
-  font-size: 0.92rem;
-  line-height: 1.9;
-  margin-bottom: 0.9rem;
-}
-
-.medical-feature-section p:last-child {
-  margin-bottom: 0;
-}
-
-.medical-feature-kicker {
-  color: #6b8f71 !important;
-  font-weight: 600;
-  letter-spacing: 0.05em;
-}
-
-.medical-feature-section .medical-chip-grid,
-.medical-feature-section .medical-advantage-grid,
-.medical-feature-section .medical-hospital-groups,
-.medical-feature-section .aesthetic-flow-grid {
-  margin: 1rem 0;
-}
-
-.aesthetic-flow-grid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 1rem;
-}
-
-.aesthetic-flow-card {
-  background: #ffffff;
-  border: 1px solid rgba(180, 170, 160, 0.24);
-  border-radius: 8px;
-  padding: 1.2rem;
-}
-
-.aesthetic-flow-card > p {
-  color: #6b8f71;
-  font-size: 0.76rem;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  margin-bottom: 0.35rem;
-}
-
-.aesthetic-flow-card h4 {
-  font-family: "Noto Serif SC", "Noto Serif JP", serif;
+.price-menu-prices dd {
   color: #2d2a26;
   font-size: 1rem;
-  letter-spacing: 0.03em;
-  margin-bottom: 0.55rem;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
 }
 
-.aesthetic-flow-card span {
-  display: block;
-  color: #6b6560;
-  font-size: 0.88rem;
-  line-height: 1.8;
-}
-
-.aesthetic-flow-card ul {
-  display: grid;
-  gap: 0.35rem;
+.price-plan-list {
   list-style: none;
+  display: grid;
+  gap: 0.55rem;
+}
+
+.price-plan-list li {
+  position: relative;
+  color: #4a4540;
+  font-size: 0.9rem;
+  line-height: 1.7;
+  padding-left: 1.2rem;
+}
+
+.price-plan-list li::before {
+  content: "◆";
+  position: absolute;
+  left: 0;
+  top: 0.05em;
+  color: var(--accent);
+  font-size: 0.7rem;
+}
+
+.price-notes {
+  list-style: none;
+  display: grid;
+  gap: 0.25rem;
   margin-top: 0.8rem;
 }
 
-.aesthetic-flow-card li {
+.price-notes li {
   position: relative;
-  color: #5d5751;
-  font-size: 0.86rem;
-  line-height: 1.6;
-  padding-left: 1rem;
+  color: #7a746d;
+  font-size: 0.8rem;
+  line-height: 1.7;
+  padding-left: 1.1rem;
 }
 
-.aesthetic-flow-card li::before {
-  content: "";
+.price-notes li::before {
+  content: "※";
   position: absolute;
   left: 0;
-  top: 0.72em;
-  width: 5px;
-  height: 5px;
-  border-radius: 50%;
-  background: rgba(107, 143, 113, 0.7);
 }
 
-.regenerative-service-block .aesthetic-flow-card li::before {
-  background: rgba(89, 128, 150, 0.72);
+.price-clinic-notes {
+  margin-top: 1.1rem;
+  padding-left: 0.2rem;
 }
 
-.regenerative-service-block .medical-flow li::before {
-  color: #597f8f;
+.price-notice {
+  margin-top: 1.4rem;
+  padding: 1rem 1.25rem;
+  background: rgba(var(--accent-rgb), 0.06);
+  border: 1px dashed rgba(var(--accent-rgb), 0.4);
+  border-radius: 8px;
 }
 
-.regenerative-service-block .medical-flow-diagram li:not(:last-child)::after {
-  background: rgba(89, 128, 150, 0.32);
+.price-notice p {
+  color: #5d5751;
+  font-size: 0.84rem;
+  line-height: 1.8;
 }
 
-.aesthetic-service-block .aesthetic-flow-card li::before {
-  background: rgba(140, 111, 130, 0.68);
+.price-notice p + p {
+  margin-top: 0.3rem;
 }
 
-.aesthetic-service-block .medical-flow li::before {
-  color: #8c6f82;
-}
-
-.regenerative-coverage-grid {
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+.price-notice p:last-child {
+  color: #2d2a26;
+  font-weight: 600;
 }
 
 .partner-list-heading {
@@ -1117,7 +1509,8 @@ main {
   padding: 2rem;
 }
 
-.partner-card h2 {
+.partner-card h2,
+.partner-card h4 {
   font-family: "Noto Serif SC", "Noto Serif JP", serif;
   font-size: 1.15rem;
   font-weight: 700;
@@ -1247,7 +1640,7 @@ footer {
   .medical-tab-list {
     position: static;
     grid-template-columns: 1fr;
-    margin-bottom: 2rem;
+    margin-bottom: 2.2rem;
   }
 
   .medical-tab {
@@ -1255,17 +1648,21 @@ footer {
     padding: 0.8rem 0.9rem;
   }
 
-  .medical-service-block {
+  .medical-panel-header {
+    margin-bottom: 2.4rem;
+  }
+
+  .medical-section {
     margin-bottom: 3rem;
   }
 
   .medical-section-heading {
     text-align: left;
-    margin-bottom: 1.4rem;
+    margin-bottom: 1.3rem;
   }
 
-  .medical-section-heading.compact {
-    margin-bottom: 1rem;
+  .medical-section-note {
+    text-align: left;
   }
 
   .medical-timeline::before {
@@ -1287,41 +1684,84 @@ footer {
     padding: 1.15rem;
   }
 
-  .medical-step-body ul {
-    grid-template-columns: 1fr;
-  }
-
-  .medical-flow {
-    justify-content: flex-start;
-  }
-
-  .medical-flow li {
-    width: 100%;
-  }
-
-  .medical-flow-diagram li {
-    min-height: auto;
-  }
-
-  .medical-flow-diagram li:not(:last-child)::after {
-    left: 1.05rem;
-    right: auto;
-    top: auto;
-    bottom: -0.75rem;
-    width: 1px;
-    height: 0.75rem;
-  }
-
+  .medical-step-services,
+  .medical-step-branches,
   .medical-chip-grid,
   .medical-advantage-grid,
-  .medical-hospital-groups,
-  .regenerative-coverage-grid,
-  .aesthetic-flow-grid {
+  .medical-group-grid,
+  .medical-group-grid.cols-3 {
     grid-template-columns: 1fr;
   }
 
-  .medical-feature-section {
-    padding: 1.15rem;
+  .medical-group-card {
+    padding: 1.2rem;
+  }
+
+  .price-switch {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .price-switch-btn {
+    min-width: 0;
+    padding: 0.65rem 0.8rem;
+  }
+
+  .price-switch-btn strong {
+    font-size: 0.86rem;
+  }
+
+  .price-switch-btn span {
+    font-size: 0.66rem;
+    letter-spacing: 0.04em;
+  }
+
+  .price-block summary {
+    padding: 0.9rem 1rem;
+  }
+
+  .price-block-body {
+    padding: 0.8rem 0.75rem 1rem;
+  }
+
+  .price-table {
+    font-size: 0.8rem;
+  }
+
+  .price-table th,
+  .price-table td {
+    padding: 0.5rem 0.4rem;
+  }
+
+  .price-table thead th {
+    font-size: 0.72rem;
+    white-space: normal;
+  }
+
+  /* On phones the group label moves into its own row so the numbers keep their width. */
+  .price-table thead th:first-child,
+  .price-group-label {
+    display: none;
+  }
+
+  .price-group-row {
+    display: table-row;
+  }
+
+  .price-table thead th:nth-child(2) {
+    text-align: right;
+  }
+
+  .price-menu-item {
+    grid-template-columns: 1fr;
+    gap: 0.7rem;
+  }
+
+  .price-menu-prices {
+    min-width: 0;
+    padding: 0.6rem 0.75rem;
+    background: rgba(var(--accent-rgb), 0.05);
+    border-radius: 6px;
   }
 
   .partner-list-heading {

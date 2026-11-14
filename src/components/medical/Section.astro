@@ -1,0 +1,19 @@
+---
+interface Props {
+  title: string;
+  intro?: string | string[];
+  prose?: boolean;
+  class?: string;
+}
+
+const { title, intro, prose = false, class: extraClass = "" } = Astro.props;
+const paragraphs = intro == null ? [] : Array.isArray(intro) ? intro : [intro];
+---
+
+<section class:list={["medical-section", extraClass]}>
+  <div class:list={["medical-section-heading", { "is-prose": prose }]}>
+    <h3>{title}</h3>
+    {paragraphs.map((paragraph) => <p>{paragraph}</p>)}
+  </div>
+  <slot />
+</section>

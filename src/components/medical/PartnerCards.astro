@@ -1,0 +1,39 @@
+---
+interface Partner {
+  name: string;
+  nameEn: string;
+  location: string;
+  image: string;
+  description: string;
+}
+
+interface Props {
+  title: string;
+  intro?: string;
+  items: Partner[];
+}
+
+const { title, intro, items } = Astro.props;
+---
+
+{items.length > 0 && (
+  <section class="medical-section medical-partner-showcase">
+    <div class="medical-section-heading">
+      <h3>{title}</h3>
+      {intro && <p>{intro}</p>}
+    </div>
+    <div class="partners-grid">
+      {items.map((partner) => (
+        <article class="partner-card">
+          <img class="partner-image" src={partner.image} alt={partner.name} loading="lazy" />
+          <div class="partner-card-body">
+            <h4>{partner.name}</h4>
+            <div class="partner-name-en">{partner.nameEn}</div>
+            <div class="partner-location">{partner.location}</div>
+            <p>{partner.description}</p>
+          </div>
+        </article>
+      ))}
+    </div>
+  </section>
+)}
