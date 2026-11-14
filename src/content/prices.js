@@ -9,7 +9,7 @@
 
 const rebornZh = {
   id: "reborn",
-  name: "东京再生医疗诊所",
+  name: "东京九州再生医疗中心",
   nameEn: "REBORN CLINIC",
   location: "东京",
   currencyNote: "以下金额单位为「万日元」（康复训练除外），均为含税价格。",
@@ -95,7 +95,7 @@ const rebornZh = {
 
 const rebornJa = {
   id: "reborn",
-  name: "東京再生医療クリニック",
+  name: "東京九州再生医療センター",
   nameEn: "REBORN CLINIC",
   location: "東京",
   currencyNote: "金額の単位は「万円」です（リハビリテーションを除く）。すべて税込価格です。",

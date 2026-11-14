@@ -325,7 +325,7 @@ export const text = {
       },
       items: [
         {
-          name: "东京再生医疗诊所",
+          name: "东京九州再生医疗中心",
           nameEn: "Tokyo Reborn Clinic",
           location: "东京·银座",
           category: "regenerative",
@@ -733,7 +733,7 @@ export const text = {
       },
       items: [
         {
-          name: "東京再生医療クリニック",
+          name: "東京九州再生医療センター",
           nameEn: "Tokyo Reborn Clinic",
           location: "東京・銀座",
           category: "regenerative",
