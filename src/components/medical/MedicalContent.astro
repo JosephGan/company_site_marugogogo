@@ -8,6 +8,8 @@ import Timeline from "./Timeline.astro";
 import GroupCards from "./GroupCards.astro";
 import PartnerCards from "./PartnerCards.astro";
 import PriceSection from "./PriceSection.astro";
+import NutritionPanel from "./NutritionPanel.astro";
+import { nutrition } from "../../content/nutrition.js";
 
 interface Props {
   lang: "zh" | "ja";
@@ -26,6 +28,7 @@ const tabs = [
   { id: "critical", label: page.tabs.critical },
   { id: "regenerative", label: page.tabs.regenerative },
   { id: "aesthetic", label: page.tabs.aesthetic },
+  { id: "nutrition", label: nutrition[lang].tab },
 ];
 ---
 
@@ -175,6 +178,16 @@ const tabs = [
       <p class="medical-section-note">{aesthetic.closing}</p>
     </Section>
 
-    <PartnerCards title={labels.aestheticTitle} intro={labels.aestheticIntro} items={partnersIn(["beauty", "nutrition"])} />
+    <PartnerCards title={labels.aestheticTitle} intro={labels.aestheticIntro} items={partnersIn(["beauty"])} />
+  </section>
+
+  <!-- 营养健康 / Nutrition (Abe Yoando Pharma) -->
+  <section class="medical-tab-panel" role="tabpanel" data-medical-panel="nutrition">
+    <div class="medical-panel-header">
+      <p class="medical-panel-eyebrow">{nutrition[lang].titleEn}</p>
+      <h2>{nutrition[lang].title}</h2>
+    </div>
+
+    <NutritionPanel data={nutrition[lang]} />
   </section>
 </div>
