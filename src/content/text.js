@@ -223,7 +223,7 @@ export const text = {
           },
           {
             region: "东京地区",
-            institutions: ["日本 Reborn 再生医疗中心", "ReM CLINIC 银座", "银座小田再生医疗中心", "银座湘南再生医疗中心"],
+            institutions: ["九州再生医疗中心东京诊所", "ReM CLINIC 银座", "银座小田再生医疗中心", "银座湘南再生医疗中心"],
             desc: "以上机构在细胞治疗、NK免疫细胞治疗、外泌体治疗、抗衰老医学及综合健康管理等领域拥有丰富的临床经验，可根据客户身体状况制定个性化治疗方案。",
           },
         ],
@@ -325,7 +325,7 @@ export const text = {
       },
       items: [
         {
-          name: "东京九州再生医疗中心",
+          name: "九州再生医疗中心东京诊所",
           nameEn: "Tokyo Reborn Clinic",
           location: "东京·银座",
           category: "regenerative",
@@ -631,7 +631,7 @@ export const text = {
           },
           {
             region: "東京エリア",
-            institutions: ["Reborn 再生医療センター", "ReM CLINIC 銀座", "銀座小田再生医療センター", "銀座湘南再生医療センター"],
+            institutions: ["九州再生医療センター東京クリニック", "ReM CLINIC 銀座", "銀座小田再生医療センター", "銀座湘南再生医療センター"],
             desc: "これらの機関は、細胞治療、NK免疫細胞治療、エクソソーム治療、抗老化医学、総合健康管理の分野で豊富な臨床経験を有し、身体状況に応じた個別治療プランを作成できます。",
           },
         ],
@@ -733,7 +733,7 @@ export const text = {
       },
       items: [
         {
-          name: "東京九州再生医療センター",
+          name: "九州再生医療センター東京クリニック",
           nameEn: "Tokyo Reborn Clinic",
           location: "東京・銀座",
           category: "regenerative",
